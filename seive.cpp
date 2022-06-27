@@ -27,8 +27,8 @@ struct prime{
 
     // print a prime number 
     void display(){
-        for(auto prime: primes)
-              cout << prime << " ";
+        for(auto prime_number: primes)
+              cout << prime_number << " ";
         cout << "\n";
     }
 
