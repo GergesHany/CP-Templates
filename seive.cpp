@@ -12,8 +12,8 @@ struct prime{
     void Seive(int n){
         is_prime.assign(n + 1, true);
         is_prime[0] = is_prime[1] = false;
-        for(ll i = 2; i * i <= n; i++)
-            if(is_prime[i])
+        for(ll i = 2; i * i <= n; i++)         (i * i <= n) = (i <= sqrt(n))
+            if(is_prime[i])   // is_prime[i] == true
                 for(ll j = i * i; j <= n; j += i)
                 is_prime[j] = false;
     }
@@ -21,7 +21,7 @@ struct prime{
     // build function to get all prime number 1 to n 
     void get_primes(int n){
         for(int i = 2; i <= n; i++) 
-            if(is_prime[i]) 
+            if(is_prime[i])            // is_prime[i] == true
                 primes.push_back(i);
     }
 
