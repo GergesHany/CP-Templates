@@ -15,7 +15,7 @@ struct Big_int{
         return res;
     }
 
-    //  sum two big two number
+    //  sum two big number
     //  10000001111199987888 + 100100012111 = 10000001211299999999
     string BigAdd(string s, string t){
         string res;
@@ -36,7 +36,7 @@ struct Big_int{
         return res;
     }
     
-     // mulipule two big two number
+     // mulipule two big number
      // 100000012112 * 99999999 = 10000001111199987888
     string BigMulti(string s, string t){
         string res;
