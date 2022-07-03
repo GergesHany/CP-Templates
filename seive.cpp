@@ -18,7 +18,7 @@ struct prime{
                 is_prime[j] = false;
     }
 
-    // build function to get all prime number 1 to n 
+    // build function to get all prime number 2 to n 
     void get_primes(int n){
         for(int i = 2; i <= n; i++) 
             if(is_prime[i])            // is_prime[i] == true
