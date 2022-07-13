@@ -82,10 +82,9 @@ struct Some_Math{
         return ((sqrt(x) == (ll)sqrt(x))); 
     } 
 
-    // Check if it valid triangle with 3 length sides
+    // Check if it valid triangle 
     bool is_triangle(ll a, ll b, ll c){
-        vector < ll > vec = {a, b, c}; sort(all(vec));
-        return (vec[0] + vec[1] > vec[2]);
+       return (a + b > c) && (a + c > b) && (b + c > a) && (a && b && c);
     }
  
     // Get Slope of two points
