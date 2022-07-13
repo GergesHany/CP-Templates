@@ -154,12 +154,12 @@ struct Some_Math{
     }
 
     // Permutation
-    ll nPr(ll n, ll r){  // nPr = n! / (n - r)!
-        if(r > n) return 0;
-        ll npr = 1;
-        while(r--)
-          npr *= n--;
-        return npr;
+    ll nPr(ll n, ll r){ // // nPr = n! / (n - r)!
+        ll ans = 1;
+        for (ll i = (n - r) + 1; i <= n; i++){
+            ans *= i; ans %= mod;
+        }
+        return ans;
     }
 
     // ----------------> some notes ---------------->>
