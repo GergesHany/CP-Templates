@@ -39,14 +39,14 @@ struct divisors{
     // get all divisors for n
     vector < ll > get_all_divisors(ll n){
     vector < ll > divisors;
-    for (int i = 1; i <= sqrt(n); i++){
-        if (n % i == 0) 
-        divisors.push_back(i),
-         divisors.push_back(n / i);
-    }
-    if(sqrt(n) == (ll)(sqrt(n))) 
-        divisors.pop_back();
-    return divisors;
+        for (int i = 1; i <= sqrt(n); i++){
+            if (n % i == 0) 
+            divisors.push_back(i),
+             divisors.push_back(n / i);
+        }
+        if(sqrt(n) == (ll)(sqrt(n))) 
+            divisors.pop_back();
+        return divisors;
     }
 
 
