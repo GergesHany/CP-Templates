@@ -168,8 +168,8 @@ struct Some_Math{
     // increasing 1 2 3 4 5 5 6 6 -> have a more than frequency
     // strictly increasing 1 2 3 4 5 6 -> not have a more than frequency
 
-    // logx(n + m) = logx(n) + logx(m);
-    // logx(n * m) = logx(n) - logx(m);
+    // logx(n * m) = logx(n) + logx(m);
+    // logx(n / m) = logx(n) - logx(m);
     // logx(pow(n, m)) = m * logx(n);
     // log(n * m) = log(n) + log(m) ->> the base is e
 
