@@ -38,11 +38,11 @@ vector < ll > vec(N);
 // (n & -n) = (lsp) -> find the right most set bit
 // __lg() = (msb) -> find the largest power of 2 that is less than or equal to n
 
-
+  // 16 % 8 == (16 & (8 - 1))
 
 struct Bits{
     
-    // 16 % 8 == (16 & (8 - 1))
+
 
     bool getbit(ll n, ll index){  // get Bit at index
         return ((n >> index) & 1);
