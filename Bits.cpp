@@ -137,7 +137,7 @@ struct Bits{
     
     }
  
-    // connt diffrent bits between two numbers 
+    // count diffrent bits between two numbers 
     ll hamming_distance(ll x, ll y){
         ll var = x ^ y, dis = 1;
         while(var &= (var - 1)) dis++;
@@ -158,43 +158,12 @@ struct Bits{
         return (findXOR(max(0, l - 1)) ^ findXOR(r));
     }
 
-    // ------------------------------------------->>
-    //num % mod mod is a power of 2
-    ll mod(ll num, ll mod) {
-        return (num & mod - 1);
-    }
-    
     // function to check if the number is power of 2
     bool isPowerOfTwo(ll num) {
         return (num & num - 1) == 0;
     }
+  
     
-    int turnOnLastZero(int S) {
-        return S | S + 1;
-    }
-    
-    int turnOffLastBit(int S) {
-        return S & S - 1;
-    }
-    
-    int turnOnLastConsecutiveZeroes(int S) {
-        return S | S - 1;
-    }
-    
-    int turnOffLastConsecutiveBits(int S) {
-        return S & S + 1;
-    }
-    // ------------------------------------------->>
-    
-    vector < int > genAllSubmask(int mask) {
-        vector< int > v;
-        for (int subMask = mask;; subMask = (subMask - 1) & mask) {
-            v.push_back(subMask);
-            if (subMask == 0)
-                break;
-        }
-        return v;
-    }
 
     // function to get all subset 
     void get_all_subset(){   // n <= 22
@@ -255,30 +224,14 @@ struct Bits{
         }
     }
 
-    void intersection(vector < int > A, int len1, vector < int > B, int len2){
-        int mask1 = 0;
-        int mask2 = 0;
-        for (int i = 0; i < len1; ++i)
-            mask1 = setBit(mask1, A[i]);
-
-        for (int i = 0; i < len2; ++i)
-            mask2 = setBit(mask2, B[i]);
-
-        int inter = mask1 & mask2;	// In O(1) noes intersection
-
-        for (int i = 0; i < max(len1, len2); ++i) {
-            if(getbit(inter, i)) cout << i << " ";
-        }
-        cout << "\n";
-    }
-
+   // function to find Max Xor Two number between range 
     int maxXORInRange(int L, int R){
         int LXR = L ^ R,  msbPos = 0;
         while (LXR) msbPos++, LXR >>= 1;
         return (pow(2, msbPos) - 1);
    }
 
-  
+  // function to find Max Xor Two number in array
   void find_maxXor_in_vector(){
     vector < ll > nums;
     ll mask = 0, Max = 0;
