@@ -35,7 +35,7 @@ struct Big_int{
         return res;
     }
     
-     // mulipule two big number with string
+     // mulipuly two big number with string
     string BigMulti(string s, string t){
         string res;
         reverse(s.begin(), s.end());
@@ -56,7 +56,7 @@ struct Big_int{
         return res;
     }
 
-    // mulipule two big number and take mod without overflow  
+    // mulipuly two big number and take mod without overflow  
     ll mul(ll a, ll b, ll mod) {
         ll res = 0;
         while (b) {
