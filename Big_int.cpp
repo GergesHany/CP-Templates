@@ -15,8 +15,7 @@ struct Big_int{
         return res;
     }
 
-    //  sum two big number
-    //  10000001111199987888 + 100100012111 = 10000001211299999999
+    //  sum two big number with string
     string BigAdd(string s, string t){
         string res;
         int sz = max(s.size(), t.size());
@@ -36,8 +35,7 @@ struct Big_int{
         return res;
     }
     
-     // mulipule two big number
-     // 100000012112 * 99999999 = 10000001111199987888
+     // mulipule two big number with string
     string BigMulti(string s, string t){
         string res;
         reverse(s.begin(), s.end());
@@ -58,7 +56,21 @@ struct Big_int{
         return res;
     }
 
-    
+    // mulipule two big number and take mod without overflow  
+    ll mul(ll a, ll b, ll mod) {
+        ll res = 0;
+        while (b) {
+            if (b & 1) res = (res + a) % mod;
+            a = (a + a) % mod;
+            b >>= 1;
+        }
+        return res;
+    }
+
+    // sum two big numbers and take mod without overflow 
+    ll sum(ll a, ll b, ll mod) {
+        return (a + b) % mod;
+    }  
 
 
 };
