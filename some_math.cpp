@@ -13,7 +13,6 @@ struct Some_Math{
     ll GCD(ll a, ll b){
         return (!b ? a : GCD(b, a % b));
         // ->> n = GCD(ll a, ll b) ->> (a + b) % n = 0 && (a - b) % n = 0
-        // ->> (a + b) % n = ( a % n  + b % n )  %  n 
     }
     
     // least common multiplication between two numbers
@@ -26,16 +25,21 @@ struct Some_Math{
       return K + floor((K - 1) / (N - 1));
     }
 
-    // sum odd number in the number
-    ll sum_Odd(ll n){
-       return (n + 1) / 2 * (n + 1) / 2;
+    // summation between 1 and n
+    ll summation(ll n){
+        return n * (n + 1) / 2;
     }
 
     // sum even number in the number
     ll sum_Even(ll n){
-        return  (n + 1) * n;
+        return (n / 2 * (n / 2 + 1));
     }
-    
+
+    // sum odd number in the number
+    ll sum_Odd(ll n){
+       return summation(n) - sum_Even(n);
+    }
+
     // find factorial of the number
     ll factorial(ll n){
         return (n == 1 ? 1 : n * factorial(n - 1));
@@ -79,7 +83,7 @@ struct Some_Math{
 
    // check the number is Perfect Square or not 
     bool PerfectSquare(long double x) {    
-        return ((sqrt(x) == (ll)sqrt(x))); 
+        return (sqrtl(x) * sqrtl(x)) == x;
     } 
 
     // Check if it valid triangle 
@@ -99,7 +103,7 @@ struct Some_Math{
     }
 
     // summation two number and take mod for them
-    ll summation(ll a, ll b){
+    ll sum(ll a, ll b){
         return ((a % Mod) + (b % Mod)) % Mod; // Mod = 1e9 + 7
     }
 
@@ -123,11 +127,6 @@ struct Some_Math{
             e /= 2; b = ((b % Mod) * (b % Mod)) % Mod;
         }
         return power % Mod; // Mod = 1'000'000'007
-    }
-
-    // summation between 1 and n
-    ll summation(ll n){
-        return n * (n + 1) / 2;
     }
 
     //  get the summation between two numbers
@@ -156,7 +155,7 @@ struct Some_Math{
     ll nPr(ll n, ll r){ // // nPr = n! / (n - r)!
         ll ans = 1;
         for (ll i = (n - r) + 1; i <= n; i++){
-            ans *= i; ans %= mod;
+            ans *= i; ans %= 1000000007;
         }
         return ans;
     }
