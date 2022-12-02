@@ -4,20 +4,18 @@ using namespace std;
 
 struct divisors{
     
-    
-    // function to Store all denominators
-    void seive_number_of_divisors(){
-   
+
+
+    // seive factorization of all numbers from 1 to 1e6
+    void seive_factorization(){ 
         vector < int > divisor(1000005, 2);    
         divisor[0] = 0, divisor[1] = 1;
         for (int i = 2; i <= 1e6 / 2; i++)
             for (int j =  i * 2; j <= 1e6; j += i)
-            divisor[j]++;
-   
+              divisor[j]++;
     }
     
     // get the number of divisors for n
-
     ll number_of_divisors(ll n){
         ll divisors = 0;
         for(int i = 1; i <= sqrt(n); i++)
@@ -27,7 +25,6 @@ struct divisors{
     }
 
     // get Summation of divisors for n
-
     ll sum_of_divisors(ll n){
         ll sum_divisors = 0;
         for(int i = 1; i < sqrt(n); i++)
@@ -37,12 +34,12 @@ struct divisors{
     }
 
     // get all divisors for n
-    vector < ll > get_all_divisors(ll n){
-    vector < ll > divisors;
+    vector < ll > get_divisors(ll n){
+        vector < ll > divisors;
         for (int i = 1; i <= sqrt(n); i++){
             if (n % i == 0) 
             divisors.push_back(i),
-             divisors.push_back(n / i);
+            divisors.push_back(n / i);
         }
         if(sqrt(n) == (ll)(sqrt(n))) 
             divisors.pop_back();
