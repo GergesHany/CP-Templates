@@ -159,6 +159,17 @@ struct Some_Math{
         }
         return ans;
     }
+    
+    // number of even numbers between a and b
+    ll get_even(ll a, ll b){
+      return (b / 2) - ((a - 1) / 2);
+    }
+
+    // number of odd numbers between a and b
+    ll get_odd(ll a, ll b){
+      return ((b - a) + 1) - get_even(a, b);
+    }
+
 
     // ----------------> some notes ---------------->>
     // ceill(x, y) = (x + y - 1) / y;
