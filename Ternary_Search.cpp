@@ -9,7 +9,7 @@ struct Ternary_Search{
 
   // example function
   ld F(ld x){
-    // 
+    // function to compare the two range
   }
 
   // ternary search
@@ -27,7 +27,7 @@ struct Ternary_Search{
 
 
   ll F(ll n){
-    // 
+    // function to compare the two range
   }
 
   ll ternary_search(ll L, ll R){
