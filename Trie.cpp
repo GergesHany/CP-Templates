@@ -22,6 +22,20 @@ template < int base = 0 > struct Trie{
     root = new node();
   }
 
+  ~Trie(){
+    Delete(root);
+    delete root;
+  }
+
+  void Delete(node* current){
+    for (auto Node : current -> child){
+       if (Node != NULL) {
+          Delete(Node);
+          delete Node;
+       }
+    }
+  }
+
   void insert(string s){
     node* current = root;
     for(auto c : s){
