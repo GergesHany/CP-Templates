@@ -57,8 +57,7 @@ template < int base = 0 > struct Trie{
   void erase(const string& word, int idx, node* current){
     if(idx == sz(word)) return void(current -> isWord = current -> freq != 1);
     erase(word, idx + 1, current -> child[word[idx] - base_char[base]]);
-    current -> child[word[idx] - base_char[base]] -> freq--;
-    if(current -> child[word[idx] - base_char[base]] -> freq == 0){
+    if(--current -> child[word[idx] - base_char[base]] -> freq == 0){
         delete current -> child[word[idx] - base_char[base]];
         current -> child[word[idx] - base_char[base]] = nullptr;
     }
