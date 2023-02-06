@@ -41,6 +41,7 @@ template < int base = 0 > struct Trie{
       if (current -> child[idx] == NULL) return false;
       current = current -> child[idx];
     }
+    return current -> isWord;
   }
 
   bool is_prefix(string s){
