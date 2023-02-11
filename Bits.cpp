@@ -38,41 +38,44 @@ vector < ll > vec(N);
 // (n & -n) = (lsp) -> find the right most set bit
 // __lg() = (msb) -> find the largest power of 2 that is less than or equal to n
 
-  // 16 % 8 == (16 & (8 - 1))
 
 struct Bits{
     
 
-
-    bool getbit(ll n, ll index){  // get Bit at index
+    // get Bit at index 
+    bool getbit(ll n, ll index){  
         return ((n >> index) & 1);
     }
 
-    ll setBit(ll n, ll index){   // open Bit
-        return (n | (1 << index));
+    ll getbit_value(ll n, ll index){  
+        return (n >> index) & 1;
+    }
+
+    // set Bit at index
+    ll setBit(ll n, ll index){   
+        return (n | (1LL << index));
     }
 
     // close Bit at index
     ll clousebits(ll n, ll index){
-        return n & (~(1 << index));
+        return n & (~(1LL << index));
     }
     
     // close bit at index 
     ll clousebits(ll n, ll index){
-        return n & (UINT_MAX ^ (1 << index));
+        return n & (UINT_MAX ^ (1LL << index));
     }
 
     // flip bit at index
     ll flibBit(ll n, ll index){
-        return n ^ (1 << index);
+        return n ^ (1LL << index);
     }
 
+    // function to convert number to binary
     string binary(ll n){
         string s;
-        while(n){
-            s += (n & 1) + '0';
-            n >>= 1;
-        }
+        while(n)
+            s += (n & 1) + '0', n >>= 1;
         reverse(all(s));
         return s;
     }
@@ -83,29 +86,27 @@ struct Bits{
     }
 
      // function get the value of the last bit
-    ll countbist(ll n){ // O(log n)
+    ll countbist(ll n){ // O(log n) ->> __builtin_popcount(n)
         ll cnt = 0;
         while(n > 0){
             cnt += n & 1;
             n >>= 1;
         }
         return cnt;
-     // __builtin_popcount(n)
     }
 
     // count bit in the number 
-    ll countbist_1(ll n){ // O(countbist(n))
+    ll countbist(ll n){ // O(countbist(n))
         ll cnt = 0;
         while((n &= (n - 1))) cnt++;
-        return cnt + 1;
-      // __builtin_popcount(n)
+        return ++cnt;
     }
 
     // function get the value of the last bit
     ll lastbitvalue(ll n){
         ll Idx = 0;
         while(n &= (n - 1)) Idx++;
-        return (1 << Idx);
+        return (1LL << Idx);
     }
 
     // function get the value of the last bit
@@ -116,25 +117,8 @@ struct Bits{
     // find the power of 2 that is graeter than n
     ll power_of_two(ll n){
         ll index = 0;
-        while(1ll << index <= n) index++;
+        while(1LL << index <= n) index++;
         return 1 << index;
-    }
-
-    // visited array whith bits
-    char ch[size]; 
-    void visitied(){ 
-
-        ll n;
-        cin >> n;
-        for (int i = 0, x; i < n && cin >> x; i++){
-            ch[x >> 3] = setBit(ch[x >> 3], (x & 7)); // open bit
-        }
-        for (int i = 0; i < 8; i++){
-            cout << i << " : ";
-            cout << (getbit(ch[i >> 3], (i & 7)) ? "found " : "not found "); // get bit
-            cout << "\n";
-        }
-    
     }
  
     // count diffrent bits between two numbers 
@@ -147,11 +131,8 @@ struct Bits{
 
    // find Xor range [l .. r]
    int findXOR(int n){
-        int mod = n % 4; 
-        if (mod == 0) return n; 
-        else if (mod == 1) return 1;
-        else if (mod == 2) return n + 1;
-        else if (mod == 3) return 0;
+      vector < int > arr = {n, 1, n + 1, 0};
+      return arr[n % 4];
     }
  
     int findXOR(int l, int r){
@@ -162,8 +143,6 @@ struct Bits{
     bool isPowerOfTwo(ll num) {
         return (num & num - 1) == 0;
     }
-  
-    
 
     // function to get all subset 
     void get_all_subset(){   // n <= 22
@@ -175,7 +154,6 @@ struct Bits{
             cout << "\n";
         }
     }
-
 
     // example for meet in the middle
     void Meet_in_Middle(){ // n <= 40
@@ -190,7 +168,7 @@ struct Bits{
         for (int i = 0; i < rhalf; i++){
             ll _xor = 0;
             for (int j = 0; j < rhalf; j++){
-            if (((i >> j) & 1)) _xor ^= vec[j + lhalf];  
+              if (((i >> j) & 1)) _xor ^= vec[j + lhalf];  
             }
             freq[_xor]++;
         }
@@ -198,30 +176,15 @@ struct Bits{
         for (int i = 0; i < lhalf; i++){
             ll _xor = 0;
             for (int j = 0; j < lhalf; j++){
-            if (((i >> j) & 1)) _xor ^= vec[j];  
+              if (((i >> j) & 1)) _xor ^= vec[j];  
             }
             ans += freq[_xor];
         }
         cout << ans << "\n";
     }
     
-    
     int gray_code(int n){
         return n ^ (n >> 1);
-    }
-
-
-   void print_number(int n, int k){
-        if (!k) return;
-        print_number(n >> 1, k - 1);
-        cout << (n & 1);
-    }
-
-    void print_all_subset_of_size_k(int k){
-        for (int i = 0; i < (1 << k); i++){
-            print_number(i, k);
-            cout << "\n";
-        }
     }
 
    // function to find Max Xor Two number between range 
