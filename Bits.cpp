@@ -141,7 +141,7 @@ struct Bits{
 
     // function to check if the number is power of 2
     bool isPowerOfTwo(ll num) {
-        return (num & num - 1) == 0;
+        return (num & num - 1) == 0 && num > 0;
     }
 
     // function to get all subset 
