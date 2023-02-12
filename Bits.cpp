@@ -224,5 +224,41 @@ struct Bits{
     int lsb(int n){
         return (n & -n);
     }
+    
+    // example of using bitset to mark visited numbers in range [0, 10^7] 
+
+    void visited_array(){
+
+
+      const int size = 12500000;
+      char visited[size + 1] = {false};
+
+      int n, q, x;   cin >> n;
+
+      auto setBit = [&](ll n, ll index) -> ll {   
+        return (n | (1LL << index));
+      };
+
+      auto getBit = [&](ll n, ll index) -> bool {
+        return (n & (1LL << index));
+      };
+
+      for (ll i = 0, val; i < n && cin >> val; i++){
+        // set bit in visited array to 1
+        // val / 8 to get the index of the byte
+        // val % 8 to get the index of the bit in the byte and set it to 1
+        visited[val >> 8] = setBit(visited[val / 8], val & 7);
+      }
+
+      cin >> q;
+      while(q-- && cin >> x){
+        // get the bit in visited array 
+        // val / 8 to get the index of the byte
+        // val % 8 to get the index of the bit in the byte and get it
+        // if the bit is 1 then the number is visited else not visited
+        cout << (getBit(visited[x >> 8], x & 7) ? "YES" : "NO") << "\n";
+      }  
+
+    }
 
 };
