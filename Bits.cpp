@@ -35,7 +35,7 @@ vector < ll > vec(N);
 // __lg(n) = fls(n) - 1
 // __lg(n) = 32 - __builtin_clz(n)
 // __lg() -> find the left most set bit
-// (n & -n) = (lsp) -> find the right most set bit
+// (n & -n) = (lsp) -> find the right most set bit in n (least significant bit) (the lowest power of 2 that is a factor of n)
 // __lg() = (msb) -> find the largest power of 2 that is less than or equal to n
 
 
