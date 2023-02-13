@@ -167,7 +167,7 @@ struct Some_Math{
 
     // number of odd numbers between a and b
     ll get_odd(ll a, ll b){
-      return ((b - a) + 1) - get_even(a, b);
+      return ((b - a) + 1) - get_even(a, b) - (a == 0);
     }
 
 
