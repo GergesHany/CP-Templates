@@ -169,6 +169,15 @@ struct Some_Math{
     ll get_odd(ll a, ll b){
       return (b + 1) / 2 - (a / 2);
     }
+    
+     // function to rotate a point by k degrees 
+    pair < double, double > rotate(pair < double, double > point, ll k){
+      long double PI = 3.14159265358979323846;
+      ld angle = k * PI / 180;
+      ld x = point.first * cos(angle) - point.second * sin(angle);
+      ld y = point.first * sin(angle) + point.second * cos(angle);
+      return make_pair(x, y);
+    };
 
 
     // ----------------> some notes ---------------->>
