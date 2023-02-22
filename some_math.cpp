@@ -178,7 +178,56 @@ struct Some_Math{
       ld y = point.first * sin(angle) + point.second * cos(angle);
       return make_pair(x, y);
     };
+    
+    // function to get the log of any base
+    ll get_log(ll n, ll base = 2){
+      return (ll)(log(n) / log(base));
+    }
+    
+    // fucntion to convert decimal to any base
+    string decimal_to_any_base(ll n, ll base){
+      string ans;
+      if (n == 0) return "0";
+      string num = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      while (n){
+        ans += num[n % base];
+        n /= base;
+      }
+      reverse(all(ans));
+      return ans;
+    }
 
+    // function to convert any base to decimal
+    ll any_base_to_decimal(string s, ll base){
+      ll ans = 0;
+      auto val = [&](char c){
+        return (isdigit(c) ? c - '0' : c - 'A' + 10);
+      };
+
+      ll power = 1;
+      for (int i = sz(s) - 1; i >= 0; i--){
+        ans += val(s[i]) * power;
+        power *= base;
+      }
+      return ans;
+    }
+    
+    //  Check if number power of another or not
+    bool is_power(ll n, ll k) {
+      if (n == 1) return true;
+      if (n % k != 0) return false;
+      return is_power(n / k, k);
+    }
+    
+    // function to get the log of any base
+    double get_log(ll n, ll base){
+      return (ll)(log(n) / log(base));
+    }
+
+    // function to Check if number power of another or not
+    bool is_power(ll n, ll base){
+      return get_log(n, base) * log(base) == log(n);
+    }
 
     // ----------------> some notes ---------------->>
     // ceill(x, y) = (x + y - 1) / y;
