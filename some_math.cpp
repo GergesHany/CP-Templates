@@ -229,6 +229,28 @@ struct Some_Math{
       return get_log(n, base) * log(base) == log(n);
     }
 
+    // function to calculate sum of all divisors from [1, n] in O(n)
+    ll sumOfDivisors(ll n) {
+      ll result = 0;
+      for (ll i = 1; i <= n; i++) {
+          result += (n / i) * i;
+      }
+      return result;
+    }
+
+    // function to calculate sum of all divisors from [1, n] in O(sqrt(n))
+    ll sum_divisors(ll num){
+        ll sum = 0, sq = sqrt(num);
+        for (ll i = 1; i <= sq; i++) {
+        // sum of all divisors from [i, num / i]  
+          ll add1 = i * (num / i - i + 1);
+          // sum of all divisors from [num / i + 1, num] = sum of all divisors from [1, num / i] - sum of all divisors from [1, i]
+          ll add2 = (((num / i) * (num / i + 1)) / 2) - ((i * (i + 1)) / 2); 
+          sum += add1 + add2;
+        }
+        return sum;
+    }
+    
     // ----------------> some notes ---------------->>
     // ceill(x, y) = (x + y - 1) / y;
     // round x > 0 ? (x + y / 2) / y : (x - y / 2) / y;
