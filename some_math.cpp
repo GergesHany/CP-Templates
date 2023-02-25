@@ -229,6 +229,8 @@ struct Some_Math{
       return get_log(n, base) * log(base) == log(n);
     }
 
+    
+    
     // function to calculate sum of all divisors from [1, n] in O(n)
     ll sumOfDivisors(ll n) {
       ll result = 0;
@@ -237,7 +239,11 @@ struct Some_Math{
       }
       return result;
     }
-
+    
+    
+    
+    // to know more for this function :: https://www.geeksforgeeks.org/sum-divisors-1-n/
+    
     // function to calculate sum of all divisors from [1, n] in O(sqrt(n))
     ll sum_divisors(ll num){
         ll sum = 0, sq = sqrt(num);
