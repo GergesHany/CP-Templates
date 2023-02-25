@@ -262,6 +262,8 @@ struct Some_Math{
     // logx(n / m) = logx(n) - logx(m);
     // logx(pow(n, m)) = m * logx(n);
     // log(n * m) = log(n) + log(m) ->> the base is e
+    // log(fact(5)) = log(5!) = log(5 * 4 * 3 * 2 * 1) = log(5) + log(4) + log(3) + log(2) + log(1)   
+
 
     // a % n == b % n = (a - b) % n ->> n (a - b)
     // (a + b) % n = (a % n + b % n) % n
