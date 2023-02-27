@@ -257,7 +257,7 @@ struct Some_Math{
         return sum;
     }
     
-      // // sum (i * (i + 1)) from 1 to n = n * (n + 1) * (2 * n + 1) / 6 
+      // sum (i * (i + 1)) from 1 to n = n * (n + 1) * (2 * n + 1) / 6 
       auto summation = [&](ll x) -> ull {
         return ((x * (x + 1) * (2 * x + 1) / 6) + sum(x));
       };
