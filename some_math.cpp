@@ -177,11 +177,6 @@ struct Some_Math{
       ld x = point.first * cos(angle) - point.second * sin(angle);
       ld y = point.first * sin(angle) + point.second * cos(angle);
       return make_pair(x, y);
-    };
-    
-    // function to get the log of any base
-    ll get_log(ll n, ll base = 2){
-      return (ll)(log(n) / log(base));
     }
     
     // fucntion to convert decimal to any base
@@ -239,9 +234,7 @@ struct Some_Math{
       }
       return result;
     }
-    
-    
-    
+      
     // to know more for this function :: https://www.geeksforgeeks.org/sum-divisors-1-n/
     
     // function to calculate sum of all divisors from [1, n] in O(sqrt(n))
