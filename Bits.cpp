@@ -195,7 +195,7 @@ struct Bits{
    }
 
   // function to find Max Xor Two number in array
-  void find_maxXor_in_vector(){
+  void find_maxXor(){
     vector < ll > nums;
     ll mask = 0, Max = 0;
     for (int i = 31; i >= 0; i--){
