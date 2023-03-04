@@ -82,8 +82,9 @@ struct Some_Math{
    }
 
    // check the number is Perfect Square or not 
-    bool PerfectSquare(long double x) {    
-        return (sqrtl(x) * sqrtl(x)) == x;
+    bool PerfectSquare(ll x) { 
+        ll temp = x;
+        return temp * temp == x;
     } 
 
     // Check if it valid triangle 
@@ -155,7 +156,7 @@ struct Some_Math{
     ll nPr(ll n, ll r){ // // nPr = n! / (n - r)!
         ll ans = 1;
         for (ll i = (n - r) + 1; i <= n; i++){
-            ans *= i; ans %= 1000000007;
+            ans *= i; ans %= Mod;
         }
         return ans;
     }
@@ -167,7 +168,7 @@ struct Some_Math{
 
     // number of odd numbers between a and b
     ll get_odd(ll a, ll b){
-      return (b + 1) / 2 - (a / 2);
+      return (b + 1) / 2 - (a / 2) - (!a);
     }
     
      // function to rotate a point by k degrees 
@@ -223,7 +224,6 @@ struct Some_Math{
     bool is_power(ll n, ll base){
       return get_log(n, base) * log(base) == log(n);
     }
-
     
     
     // function to calculate sum of all divisors from [1, n] in O(n)
@@ -251,8 +251,8 @@ struct Some_Math{
     }
     
       // sum (i * (i + 1)) from 1 to n = n * (n + 1) * (2 * n + 1) / 6 
-      auto summation = [&](ll x) -> ull {
-        return ((x * (x + 1) * (2 * x + 1) / 6) + sum(x));
+      auto summation = [&](ull x) -> ull {
+        return ((x * (x + 1) * (2 * x + 1) / 6) + (x * (x + 1) / 2));
       };
     
     // ----------------> some notes ---------------->>
