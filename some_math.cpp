@@ -121,7 +121,6 @@ struct Some_Math{
     }
 
     // b power e % mod in O(log(n))
-
     ll fast_pow(ll b, ll e){
         ll power = 1;
         while(e){
@@ -129,6 +128,15 @@ struct Some_Math{
             e /= 2; b = ((b % Mod) * (b % Mod)) % Mod;
         }
         return power % Mod; // Mod = 1'000'000'007
+    }
+    
+    // function to calculate sum of powers of x from 1 to n
+    ll sum_powers(ll x, ll n, ll mod = mod){
+      if (n == 1) return x % mod;
+      ll power = sum_powers(x, n / 2, mod);
+      ll ans = (power + (power * fast_pow(x, n / 2, mod))) % mod;
+      if (n & 1) ans = (ans + fast_pow(x, n, mod)) % mod;
+      return ans;
     }
 
     //  get the summation between two numbers
@@ -226,31 +234,7 @@ struct Some_Math{
       return get_log(n, base) * log(base) == log(n);
     }
     
-    
-    // function to calculate sum of all divisors from [1, n] in O(n)
-    ll sumOfDivisors(ll n) {
-      ll result = 0;
-      for (ll i = 1; i <= n; i++) {
-          result += (n / i) * i;
-      }
-      return result;
-    }
-      
-    // to know more for this function :: https://www.geeksforgeeks.org/sum-divisors-1-n/
-    
-    // function to calculate sum of all divisors from [1, n] in O(sqrt(n))
-    ll sum_divisors(ll num){
-        ll sum = 0, sq = sqrt(num);
-        for (ll i = 1; i <= sq; i++) {
-        // sum of all divisors from [i, num / i]  
-          ll add1 = i * (num / i - i + 1);
-          // sum of all divisors from [num / i + 1, num] = sum of all divisors from [1, num / i] - sum of all divisors from [1, i]
-          ll add2 = (((num / i) * (num / i + 1)) / 2) - ((i * (i + 1)) / 2); 
-          sum += add1 + add2;
-        }
-        return sum;
-    }
-    
+
       // sum (i * (i + 1)) from 1 to n = n * (n + 1) * (2 * n + 1) / 6 
       ll summation(ll x){
         return ((x * (x + 1) * (2 * x + 1) / 6) + (x * (x + 1) / 2));
