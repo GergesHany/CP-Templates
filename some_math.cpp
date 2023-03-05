@@ -3,6 +3,7 @@ typedef long long ll;
 typedef long double ld;
 #define Mod 1'000'000'007
 #define all(s) s.begin(), s.end()
+#define sz(s) int(s.size())
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -251,9 +252,9 @@ struct Some_Math{
     }
     
       // sum (i * (i + 1)) from 1 to n = n * (n + 1) * (2 * n + 1) / 6 
-      auto summation = [&](ull x) -> ull {
+      ll summation(ll x){
         return ((x * (x + 1) * (2 * x + 1) / 6) + (x * (x + 1) / 2));
-      };
+      }
     
     // ----------------> some notes ---------------->>
     // ceill(x, y) = (x + y - 1) / y;
