@@ -3,8 +3,6 @@
 using namespace std;
 
 struct factorization{
-    
-
 
     // seive factorization of all numbers from 1 to 1e6
     void seive_factorization(){ 
@@ -45,6 +43,32 @@ struct factorization{
             divisors.pop_back();
         return divisors;
     }
+    
+        
+    // to know more for this two function :: https://www.geeksforgeeks.org/sum-divisors-1-n
+    
+    // function to calculate sum of all divisors from [1, n] in O(n)
+    ll sumOfDivisors(ll n) {
+      ll result = 0;
+      for (ll i = 1; i <= n; i++) {
+          result += (n / i) * i;
+      }
+      return result;
+    }
+
+    // function to calculate sum of all divisors from [1, n] in O(sqrt(n))
+    ll sum_divisors(ll num){
+        ll sum = 0, sq = sqrt(num);
+        for (ll i = 1; i <= sq; i++) {
+        // sum of all divisors from [i, num / i]  
+          ll add1 = i * (num / i - i + 1);
+          // sum of all divisors from [num / i + 1, num] = sum of all divisors from [1, num / i] - sum of all divisors from [1, i]
+          ll add2 = (((num / i) * (num / i + 1)) / 2) - ((i * (i + 1)) / 2); 
+          sum += add1 + add2;
+        }
+        return sum;
+    }
+    
 
 
 };
