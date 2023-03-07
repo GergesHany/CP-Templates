@@ -24,13 +24,13 @@ template < typename T = int > struct Modulo_multiplicative_inverse{
   T fast_power(T a, T b){
     T res = 1;
     while (b){
-      if (b & 1) res = (res * a) % Mod;
-      a = (a * a) % Mod;
+      if (b & 1) res = (res % Mod * a % Mod) % Mod;
+      a = (a % Mod * a % Mod) % Mod;
       b >>= 1;
     }
     return res;
   }
-
+  
   // fact[n] / (fact[r] * fact[n - r]) = fact[n] * (fact[r] * fact[n - r])^-1 = fact[n] * inv_fact[r] * inv_fact[n - r]
   T nCr(T n, T r){
     if (n < r) return 0;
