@@ -3,14 +3,14 @@ using namespace std;
 #define sz(s) int(s.size())  
 typedef long long ll;
 
-template < typename T = int > struct montonic_stack{
+template < typename T = int > struct monotonic stack{
   
   T n;
   vector < T > v;
   vector < T > ans;
   vector < pair < T, T > > st;
 
-  montonic_stack(vector < T > &v) : v(v) {
+  monotonic stack(vector < T > &v) : v(v) {
     n = sz(v);
     ans = vector < T > (n);
   }
@@ -67,7 +67,7 @@ int main()
 {
 
   vector < ll > v = {1, 3, 2, 4, 1};
-  montonic_stack < ll > st(v);
+  monotonic stack < ll > st(v);
   vector < ll > ans = st.next_greater_element();
   for (auto & i: ans) cout << i << " ";
 
