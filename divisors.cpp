@@ -1,16 +1,15 @@
-#define ll long long
 #include <bits/stdc++.h>
-using namespace std;
+#define ll long long
 
-struct factorization{
+template < typename T = int > struct factorization{
 
     // seive factorization of all numbers from 1 to 1e6
-    void seive_factorization(){ 
-        vector < int > divisor(1000005, 2);    
-        divisor[0] = 0, divisor[1] = 1;
-        for (int i = 2; i <= 1e6 / 2; i++)
-            for (int j =  i * 2; j <= 1e6; j += i)
-              divisor[j]++;
+    void seive_factorization(T n){ 
+      vector < T > divisors(n + 1, 0);
+        divisors[0] = 0, divisors[1] = 1;
+        for (int i = 2; i <= n / 2; i++)
+            for (int j =  i * 2; j <= n; j += i)
+              divisors[j]++;
     }
     
     // get the number of divisors for n
@@ -45,30 +44,28 @@ struct factorization{
     }
     
         
-    // to know more for this two function :: https://www.geeksforgeeks.org/sum-divisors-1-n
-    
-    // function to calculate sum of all divisors from [1, n] in O(n)
-    ll sumOfDivisors(ll n) {
-      ll result = 0;
-      for (ll i = 1; i <= n; i++) {
-          result += (n / i) * i;
+  // to know more for this two function :: https://www.geeksforgeeks.org/sum-divisors-1-n
+  
+  // function to calculate sum of all divisors from [1, n] in O(n)
+  ll sumOfDivisors(ll n) {
+    ll result = 0;
+    for (ll i = 1; i <= n; i++) {
+        result += (n / i) * i;
+    }
+    return result;
+  }
+
+  // function to calculate sum of all divisors from [1, n] in O(sqrt(n))
+  ll sum_divisors(ll num){
+      ll sum = 0, sq = sqrt(num);
+      for (ll i = 1; i <= sq; i++) {
+      // sum of all divisors from [i, num / i]  
+        ll add1 = i * (num / i - i + 1);
+        // sum of all divisors from [num / i + 1, num] = sum of all divisors from [1, num / i] - sum of all divisors from [1, i]
+        ll add2 = (((num / i) * (num / i + 1)) / 2) - ((i * (i + 1)) / 2); 
+        sum += add1 + add2;
       }
-      return result;
+      return sum;
     }
-
-    // function to calculate sum of all divisors from [1, n] in O(sqrt(n))
-    ll sum_divisors(ll num){
-        ll sum = 0, sq = sqrt(num);
-        for (ll i = 1; i <= sq; i++) {
-        // sum of all divisors from [i, num / i]  
-          ll add1 = i * (num / i - i + 1);
-          // sum of all divisors from [num / i + 1, num] = sum of all divisors from [1, num / i] - sum of all divisors from [1, i]
-          ll add2 = (((num / i) * (num / i + 1)) / 2) - ((i * (i + 1)) / 2); 
-          sum += add1 + add2;
-        }
-        return sum;
-    }
-    
-
 
 };
