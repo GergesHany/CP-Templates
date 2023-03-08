@@ -261,7 +261,7 @@ struct Some_Math{
     // (n ^ x) % n == 0 ->> for all x > 0
 
     // count number of prime 1 to n ->> ~= n / log(n) 
-    // (p - 1)! % p = p - 1 ->> for all p is prime number
+    // wilson theorem for prime numbers (n - 1)! % n = n - 1 if n is prime
     // n! % x == 0 for all x <= n
     // 2! is onle prime factorization 
 
