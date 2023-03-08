@@ -155,10 +155,15 @@ struct Some_Math{
     } 
 
     // Combination
-    ll nCr(ll n, ll r){  // nCr = n! / (r! * (n-r)!)
-        if (r > n)  return 0;
-        if (n == r or r == 0) return 1;
-        return nCr(n - 1, r - 1) + nCr(n - 1, r);
+    ll ncr(ll n, ll r){ // nCr = n! / (r! * (n-r)!)
+      if(r > n) return 0;
+      if(r > n - r) r = n - r;
+      ll ans = 1;
+      for(ll i = 1; i <= r; i++){
+        ans *= n - r + i;
+        ans /= i;
+      }
+      return ans;
     }
 
     // Permutation
