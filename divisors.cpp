@@ -5,7 +5,7 @@ template < typename T = int > struct factorization{
 
     // seive factorization of all numbers from 1 to 1e6
     void seive_factorization(T n){ 
-      vector < T > divisors(n + 1, 0);
+      vector < T > divisors(n + 1, 2);
         divisors[0] = 0, divisors[1] = 1;
         for (int i = 2; i <= n / 2; i++)
             for (int j =  i * 2; j <= n; j += i)
