@@ -55,11 +55,6 @@ template < typename T = int > struct monotonic stack{
     return ans;
   }
 
-  // print the answer
-  void print(){
-    for (int i = 0; i < n; i++) 
-      cout << ans[i] << " \n"[i == n - 1];
-  }
 
 };
 
