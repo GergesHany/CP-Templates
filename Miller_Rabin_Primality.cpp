@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
 template < typename T = long long > struct Miller_Rabin_Primality{
 
   int rounds = 20;
