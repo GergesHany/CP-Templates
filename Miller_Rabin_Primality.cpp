@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+#define ll long long
 
 template < typename T = long long > struct Miller_Rabin_Primality{
 
@@ -54,3 +54,12 @@ template < typename T = long long > struct Miller_Rabin_Primality{
 
 };
 
+
+int main() {
+  
+  int x = 10;
+  Miller_Rabin_Primality < ll > miller_rabin;
+  cout << (miller_rabin.is_prime(x) ? "YES" : "NO") << endl;
+
+  return 0;
+}
