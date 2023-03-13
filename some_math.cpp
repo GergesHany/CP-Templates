@@ -264,6 +264,8 @@ struct Some_Math{
     // (a % b) = c ->> a -= c ->> a is a multiply for b
     // ex ->> 13 % 4 = 1 ->> 13 - 1 = 12 ->> 12 / 3 = 4 
     // (n ^ x) % n == 0 ->> for all x > 0
+    
+    // segma f(2 ^ x) = 2 ^ (x + 1) - 1
 
     // count number of prime 1 to n ->> ~= n / log(n) 
     // wilson theorem for prime numbers (n - 1)! % n = n - 1 if n is prime
