@@ -4,7 +4,7 @@ using namespace std;
 
 template < typename T = long long > struct Miller_Rabin_Primality{
 
-  int rounds = 20;
+  int rounds = 20; // The number of rounds of Miller-Rabin test to run
 
   T binpow(T a, T b, T mod) {
     T res = 1;
