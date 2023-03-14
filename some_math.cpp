@@ -245,6 +245,16 @@ struct Some_Math{
         return ((x * (x + 1) * (2 * x + 1) / 6) + (x * (x + 1) / 2));
       }
     
+    
+    ll rev_sum(ll sum){
+      return sqrt(0.25 + 2 * sum) - 0.5;
+    }
+
+    ll rev_sum(ll sum){
+      return (-1 + sqrt(1 + 8 * sum)) / 2;
+    }
+
+    
     // ----------------> some notes ---------------->>
     // ceill(x, y) = (x + y - 1) / y;
     // round x > 0 ? (x + y / 2) / y : (x - y / 2) / y;
