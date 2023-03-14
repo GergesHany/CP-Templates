@@ -4,13 +4,12 @@
 #define sz(x) (int)x.size()
 using namespace std;
 
-
-struct prefix_sum_2d{
+template < typename T = long long > struct  prefix_sum_2d{
   
   // build prefix sum 2d
-  vector < vector < ll > > prefix_sum(vector < vector < ll > > &v){
+  vector < vector < T > > prefix_sum(vector < vector < T > > &v){
     int n = sz(v), m = sz(v[0]);
-    vector < vector < ll > > ps(n + 1, vector < ll > (m + 1, 0));
+    vector < vector < T > > ps(n + 1, vector < T > (m + 1, 0));
     for (int i = 1; i <= n; i++){
         for (int j = 1; j <= m; j++){
             ps[i][j] = v[i - 1][j - 1] + ps[i - 1][j] + ps[i][j - 1] - ps[i - 1][j - 1];
@@ -20,7 +19,7 @@ struct prefix_sum_2d{
   }
 
   // query in prefix sum 2d
-  ll query(vector < vector < ll > > &ps, int x1, int y1, int x2, int y2){
+  T query(vector < vector < T > > &ps, T x1, T y1, T x2, T y2){
     return ps[x2][y2] - ps[x1 - 1][y2] - ps[x2][y1 - 1] + ps[x1 - 1][y1 - 1];
   }
   
