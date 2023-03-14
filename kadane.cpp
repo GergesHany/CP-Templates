@@ -2,11 +2,11 @@
 using namespace std; 
 typedef long long ll;
 
-struct kadane{
+template < typename T = int > struct kadane{
 
   // max subarray sum in O(n) 1d kadane's algorithm
-  ll get_max_sum(vector < ll >& vec){
-      ll curr = 0, max_sum = -INF;
+  T get_max_sum(vector < T >& vec){
+      T curr = 0, max_sum = -INF;
       for(auto x : vec){
           curr += x;
           updmax(max_sum, curr);
@@ -17,8 +17,8 @@ struct kadane{
 
 
   // min subarray sum in O(n) 1d kadane's algorithm  
-  ll get_min_sum(vector < ll >& vec){
-    ll curr = 0, min_sum = INF;
+  T get_min_sum(vector < T >& vec){
+    T curr = 0, min_sum = INF;
     for (auto& i: vec) {
       curr += i;
       min_sum = min(min_sum, curr);
@@ -28,11 +28,11 @@ struct kadane{
   }
 
   // max subarray sum 2d kadane's algorithm
-  ll get_max_sum(vector < vector < ll > >& vec){
-    ll n = sz(vec), m = sz(vec[0]);
-    ll max_sum = -INF;
+  T get_max_sum(vector < vector < T > >& vec){
+    T n = sz(vec), m = sz(vec[0]);
+    T max_sum = -INF;
     for(int i = 0; i < m; i++){
-      vector < ll > temp(n);
+      vector < T > temp(n);
       for(int j = i; j < m; j++){
         for(int k = 0; k < n; k++) temp[k] += vec[k][j];
         updmax(max_sum, get_max_sum(temp));
@@ -43,11 +43,11 @@ struct kadane{
 
 
   // min subarray sum 2d kadane's algorithm
-  ll get_min_sum(vector < vector < ll > >& vec){
-    ll n = sz(vec), m = sz(vec[0]);
-    ll min_sum = INF;
+  T get_min_sum(vector < vector < T > >& vec){
+    T n = sz(vec), m = sz(vec[0]);
+    T min_sum = INF;
     for(int i = 0; i < m; i++){
-      vector < ll > temp(n);
+      vector < T > temp(n);
       for(int j = i; j < m; j++){
         for(int k = 0; k < n; k++) temp[k] += vec[k][j];
         updmin(min_sum, get_min_sum(temp));
