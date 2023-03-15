@@ -3,14 +3,14 @@ using namespace std;
 #define sz(s) int(s.size())  
 typedef long long ll;
 
-template < typename T = int > struct monotonic stack{
+template < typename T = int > struct monotonic_stack{
   
   T n;
   vector < T > v;
   vector < T > ans;
   vector < pair < T, T > > st;
 
-  monotonic stack(vector < T > &v) : v(v) {
+  monotonic_stack(vector < T > &v) : v(v) {
     n = sz(v);
     ans = vector < T > (n);
   }
