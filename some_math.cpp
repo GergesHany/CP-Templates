@@ -240,10 +240,10 @@ struct Some_Math{
     }
     
 
-      // sum (i * (i + 1)) from 1 to n = n * (n + 1) * (2 * n + 1) / 6 
-      ll summation(ll x){
-        return ((x * (x + 1) * (2 * x + 1) / 6) + (x * (x + 1) / 2));
-      }
+    // sum (i * (i + 1)) from 1 to n = n * (n + 1) * (2 * n + 1) / 6 
+    ll summation(ll x){
+      return ((x * (x + 1) * (2 * x + 1) / 6) + (x * (x + 1) / 2));
+    }
     
     
     ll rev_sum(ll sum){
