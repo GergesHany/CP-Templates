@@ -3,10 +3,19 @@ template < typename T = int > struct factorization{
   // seive factorization
   void seive_factorization(T n){ 
     vector < T > divisors(n + 1, 2);
-      divisors[0] = 0, divisors[1] = 1;
-      for (int i = 2; i <= n / 2; i++)
-          for (int j =  i * 2; j <= n; j += i)
-            divisors[j]++;
+    divisors[0] = 0, divisors[1] = 1;
+    for (int i = 2; i <= n / 2; i++)
+        for (int j =  i * 2; j <= n; j += i) divisors[j]++;
+  }
+
+  void prime_factorization(int n){
+      vector < T > prime_factors(n + 5);
+      for (int i = 2; i <= 1e6; i++){ 
+          if (!prime_factors[i]) { 
+            for (int j = 2 * i; j <= 1e6; j += i) prime_factors[j]++;
+            prime_factors[i] = 1; 
+          }
+      }
   }
     
   // get the number of divisors for n
