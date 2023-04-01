@@ -18,6 +18,8 @@ struct factorization{
       }
   }
     
+  // -----------------------------------------------------------------------------------------------------------------------------------
+  
   // get the number of divisors for n
   ll number_of_divisors(ll n){
     ll cnt = 0;
@@ -52,6 +54,8 @@ struct factorization{
             }
         }
     }
+  
+ // ----------------------------------------------------------------------------------------------------------------------------------- 
     
  // to know more for this two function :: https://www.geeksforgeeks.org/sum-divisors-1-n
 
@@ -76,5 +80,33 @@ struct factorization{
       }
       return sum;
     }
+  
+  
+  // -----------------------------------------------------------------------------------------------------------------------------------
+  
+  // any number can be represented as a product of prime factors 
+  // for example 12 = (2^2) * (3^1) the number of divisors of 12 is (2 + 1) * (1 + 1) = 6 
+  // the number of divisors of n! is the (product of the number of divisors of each prime factor) + 1 from 1 to n
+
+  ll number_of_divisors(ll n){
+    ll ans = 1;
+    ll freq[1005] {};
+
+    // find the prime factors of n and count the number of times each prime factor appears
+    for (ll i = n; i >= 1; i--){
+      ll val = i; // val is the number that we will factorize
+      for (ll j = 2; j <= val; j++)
+         // if j is a prime factor of val then count the number of times it appears
+         while(val % j == 0) freq[j]++, val /= j;
+    }
+
+    for (ll i = 1; i <= n; i++){
+     // multiply the number of divisors of each prime factor by the number of divisors of n! 
+      ans *= (freq[i] + 1);
+    }
+
+    return ans;
+  }
+  
 
 };
