@@ -18,10 +18,9 @@ template < typename T = int > struct Modulo_multiplicative_inverse{
   Modulo_multiplicative_inverse(T n, T r, T Mod) : n(n), r(r), Mod(Mod) {
     fact = vector < T > (n + 1, 1);
     inv_fact = vector < T > (n + 1, 1);
-    for (T i = 1; i <= n; i++) {
-      fact[i] = Take_mod(fact[i - 1], i);
-      inv_fact[i] = Modulo_Inverse(fact[i]);
-    }
+    for (T i = 1; i <= n; i++) fact[i] = Take_mod(fact[i - 1], i);
+    inv_fact[n] = Modulo_Inverse(fact[n]);
+    for (T i = n - 1; i >= 0; i--) inv_fact[i] = Take_mod(inv_fact[i + 1], i + 1);
   }
  
   T fast_power(T a, T b){
