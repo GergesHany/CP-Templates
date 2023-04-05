@@ -1,5 +1,6 @@
  ## Competitive Programming Templates 
  
+ <hr>
  
  ### Data Structures
 - [Trie](https://github.com/GergesHany/CP-Templates/blob/master/Trie.cpp)
