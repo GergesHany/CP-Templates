@@ -32,7 +32,8 @@
 ## String Algorithm
 - [Kmp](https://github.com/GergesHany/CP-Templates/blob/master/KMP.cpp)
 
-<br><br><br>
+<hr>
+<br><br>
 
 </details>
 	
