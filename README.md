@@ -31,3 +31,9 @@
 
 ## String Algorithm
 - [Kmp](https://github.com/GergesHany/CP-Templates/blob/master/KMP.cpp)
+
+<br><br><br>
+
+</details>
+	
+<picture> <img align="center" src="https://github.com/GergesHany/GergesHany/blob/main/00xWolf_2.gif" width = 650px></picture>
