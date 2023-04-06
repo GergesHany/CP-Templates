@@ -23,7 +23,7 @@ template < typename T = long long > struct Hash {
     }
   }
  
-  void init(string &s) {    
+  void build(string &s) {    
     h1[0] = h2[0] = s[0] - 'a' + 1;
     for (T i = 1; i < sz(s); i++) {
       h1[i] = (1LL * h1[i - 1] * p[0] + s[i] - 'a' + 1) % mod[0];
