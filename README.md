@@ -1,4 +1,9 @@
  ## Competitive Programming Templates 
+
+<hr>
+ 
+## String Algorithm
+- [Kmp](https://github.com/GergesHany/CP-Templates/blob/master/KMP.cpp)
  
  <hr>
  
@@ -27,10 +32,6 @@
 - [factorization](https://github.com/GergesHany/CP-Templates/blob/master/factorization.cpp)
 - [Miller Rabin Primality](https://github.com/GergesHany/CP-Templates/blob/master/Miller_Rabin_Primality.cpp)
 - [Modulo multiplicative inverse](https://github.com/GergesHany/CP-Templates/blob/master/Modulo_multiplicative_inverse.cpp)
-
-
-## String Algorithm
-- [Kmp](https://github.com/GergesHany/CP-Templates/blob/master/KMP.cpp)
 
 <hr>
 <br><br>
