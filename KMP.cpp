@@ -20,16 +20,6 @@ template < typename T = int > struct KMP{
       pi[i] = j;
     }
   }
-
-  vector < T > match(string t){
-    vector < T > ans(sz(t));
-    for(int i = 0, j = 0; i < sz(t); i++){
-      while(j > 0 && t[i] != s[j]) j = pi[j - 1];
-      if(t[i] == s[j]) j++;
-      ans[i] = j;
-    }
-    return ans;
-  }
   
   string get_lps(){
     string ans;
@@ -41,8 +31,17 @@ template < typename T = int > struct KMP{
     return ans;
   }
 
-};
+  T count(string s, string patern){
+    T ans = 0;
+    for(int i = 0, j = 0; i < sz(s); i++){
+      while(j > 0 && s[i] != patern[j]) j = pi[j - 1];
+      if(s[i] == patern[j]) j++;
+      if(j == sz(patern)) ans++, j = pi[j - 1];
+    }
+    return ans;
+  }
 
+};
 
 int main()
 {
