@@ -1,6 +1,5 @@
  ## Competitive Programming Templates 
 
-<hr>
  
 ## String Algorithm
 - [Kmp](https://github.com/GergesHany/CP-Templates/blob/master/KMP.cpp)
