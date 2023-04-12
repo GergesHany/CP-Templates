@@ -178,7 +178,7 @@ struct Bits{
     int maxXORInRange(int L, int R){
         int LXR = L ^ R,  msbPos = 0;
         while (LXR) msbPos++, LXR >>= 1;
-        return (pow(2, msbPos) - 1);
+        return (1 << msbPos) - 1;
    }
 
   // function to find Max Xor Two number in array
