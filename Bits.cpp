@@ -234,7 +234,7 @@ struct Bits{
         // set bit in visited array to 1
         // val / 8 to get the index of the byte
         // val % 8 to get the index of the bit in the byte and set it to 1
-        visited[val >> 8] = setBit(visited[val / 8], val & 7);
+        visited[val >> 3] = setBit(visited[val / 8], val & 7);
       }
 
       cin >> q;
@@ -243,7 +243,7 @@ struct Bits{
         // val / 8 to get the index of the byte
         // val % 8 to get the index of the bit in the byte and get it
         // if the bit is 1 then the number is visited else not visited
-        cout << (getBit(visited[x >> 8], x & 7) ? "YES" : "NO") << "\n";
+        cout << (getBit(visited[x >> 3], x & 7) ? "YES" : "NO") << "\n";
       }  
 
     }
