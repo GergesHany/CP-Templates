@@ -115,14 +115,6 @@ struct Bits{
         while(1LL << index <= n) index++;
         return 1 << index;
     }
- 
-    // count diffrent bits between two numbers 
-    ll hamming_distance(ll x, ll y){
-        ll var = x ^ y, dis = 1;
-        while(var &= (var - 1)) dis++;
-        return dis;
-    }
-
 
    // find Xor range [l .. r]
    int findXOR(int n){
