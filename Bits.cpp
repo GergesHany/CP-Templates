@@ -46,10 +46,6 @@ struct Bits{
         return ((n >> index) & 1);
     }
 
-    ll getbit_value(ll n, ll index){  
-        return (n >> index) & 1;
-    }
-
     // set Bit at index
     ll setBit(ll n, ll index){   
         return (n | (1LL << index));
