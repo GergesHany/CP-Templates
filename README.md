@@ -29,6 +29,7 @@
 - [Math](https://github.com/GergesHany/CP-Templates/blob/master/some_math.cpp)
 - [Seive](https://github.com/GergesHany/CP-Templates/blob/master/Seive.cpp)
 - [factorization](https://github.com/GergesHany/CP-Templates/blob/master/factorization.cpp)
+- [some theories](https://github.com/GergesHany/CP-Templates/blob/master/some_theories.cpp)
 - [Miller Rabin Primality](https://github.com/GergesHany/CP-Templates/blob/master/Miller_Rabin_Primality.cpp)
 - [Modulo multiplicative inverse](https://github.com/GergesHany/CP-Templates/blob/master/Modulo_multiplicative_inverse.cpp)
 
