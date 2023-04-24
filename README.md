@@ -22,6 +22,7 @@
 ### Dynamic Programming
 - [kadane](https://github.com/GergesHany/CP-Templates/blob/master/kadane.cpp)
 - [prefix sum 2d](https://github.com/GergesHany/CP-Templates/blob/master/prefix_2D.cpp)
+- [Partial sum 2d](https://github.com/GergesHany/CP-Templates/blob/master/Partial_sum_2d.cpp)
 
 <hr>
 
