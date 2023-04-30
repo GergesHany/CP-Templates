@@ -32,7 +32,6 @@ vector < ll > vec(N);
 // >> -> shift all bits to the right by n
 
 // __lg(n) = floor(log2(n))
-// __lg(n) = fls(n) - 1
 // __lg(n) = 32 - __builtin_clz(n)
 // __lg() -> find the left most set bit
 // (n & -n) = (lsp) -> find the right most set bit in n (least significant bit) (the lowest power of 2 that is a factor of n)
@@ -45,10 +44,6 @@ struct Bits{
     // get Bit at index 
     bool getbit(ll n, ll index){  
         return ((n >> index) & 1);
-    }
-
-    ll getbit_value(ll n, ll index){  
-        return (n >> index) & 1;
     }
 
     // set Bit at index
@@ -120,14 +115,6 @@ struct Bits{
         while(1LL << index <= n) index++;
         return 1 << index;
     }
- 
-    // count diffrent bits between two numbers 
-    ll hamming_distance(ll x, ll y){
-        ll var = x ^ y, dis = 1;
-        while(var &= (var - 1)) dis++;
-        return dis;
-    }
-
 
    // find Xor range [l .. r]
    int findXOR(int n){
@@ -191,7 +178,7 @@ struct Bits{
     int maxXORInRange(int L, int R){
         int LXR = L ^ R,  msbPos = 0;
         while (LXR) msbPos++, LXR >>= 1;
-        return (pow(2, msbPos) - 1);
+        return (1 << msbPos) - 1;
    }
 
   // function to find Max Xor Two number in array
@@ -247,7 +234,7 @@ struct Bits{
         // set bit in visited array to 1
         // val / 8 to get the index of the byte
         // val % 8 to get the index of the bit in the byte and set it to 1
-        visited[val >> 8] = setBit(visited[val / 8], val & 7);
+        visited[val >> 3] = setBit(visited[val / 8], val & 7);
       }
 
       cin >> q;
@@ -256,7 +243,7 @@ struct Bits{
         // val / 8 to get the index of the byte
         // val % 8 to get the index of the bit in the byte and get it
         // if the bit is 1 then the number is visited else not visited
-        cout << (getBit(visited[x >> 8], x & 7) ? "YES" : "NO") << "\n";
+        cout << (getBit(visited[x >> 3], x & 7) ? "YES" : "NO") << "\n";
       }  
 
     }
