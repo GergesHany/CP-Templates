@@ -131,7 +131,7 @@ struct Some_Math{
     }
     
     // function to calculate sum of powers of x from 1 to n
-    ll sum_powers(ll x, ll n, ll mod = mod){
+    ll sum_powers(ll x, ll n, ll mod){
       if (n == 1) return x % mod;
       ll power = sum_powers(x, n / 2, mod);
       ll ans = (power + (power * fast_pow(x, n / 2, mod))) % mod;
@@ -245,7 +245,7 @@ struct Some_Math{
       return ((x * (x + 1) * (2 * x + 1) / 6) + (x * (x + 1) / 2));
     }
     
-    
+    // find the reverse sum of a number
     ll rev_sum(ll sum){
       return sqrt(0.25 + 2 * sum) - 0.5;
     }
@@ -253,6 +253,7 @@ struct Some_Math{
     ll rev_sum(ll sum){
       return (-1 + sqrt(1 + 8 * sum)) / 2;
     }
+
 
     
     // ----------------> some notes ---------------->>
