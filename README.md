@@ -34,6 +34,7 @@
 - [some theories](https://github.com/GergesHany/CP-Templates/blob/master/some_theories.cpp)
 - [Miller Rabin Primality](https://github.com/GergesHany/CP-Templates/blob/master/Miller_Rabin_Primality.cpp)
 - [Modulo multiplicative inverse](https://github.com/GergesHany/CP-Templates/blob/master/Modulo_multiplicative_inverse.cpp)
+- [Sieve prime factorization](https://github.com/GergesHany/CP-Templates/blob/master/Seive%20Prime%20Factors.cpp)
 
 <hr>
 <br><br>
