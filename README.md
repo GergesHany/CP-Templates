@@ -6,6 +6,15 @@
  
  <hr>
  
+ ## Data types Templates
+ 
+ - [Big integer](https://github.com/GergesHany/CP-Templates/blob/master/Big%20integer.cpp)
+ 
+ <hr>
+ 
+ 
+ 
+ 
  ### Data Structures
 - [Trie](https://github.com/GergesHany/CP-Templates/blob/master/Trie.cpp)
 - [binary trie](https://github.com/GergesHany/CP-Templates/blob/master/binary_trie.cpp)
