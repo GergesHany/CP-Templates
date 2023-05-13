@@ -30,7 +30,15 @@ template < typename T = long long > struct Hash {
       h2[i] = (1LL * h2[i - 1] * p[1] + s[i] - 'a' + 1) % mod[1];
     }
   }
- 
+
+  void build(vector < T > &v) {    
+    h1[0] = h2[0] = v[0];
+    for (T i = 1; i < sz(v); i++) {
+      h1[i] = (1LL * h1[i - 1] * p[0] + v[i]) % mod[0];
+      h2[i] = (1LL * h2[i - 1] * p[1] + v[i]) % mod[1];
+    }
+  }
+
   pair < T, T > get_hash(T l, T r) {
     // first = hash of s[l..r] based on p1
     T F = h1[r];
@@ -39,6 +47,10 @@ template < typename T = long long > struct Hash {
     T S = h2[r];
     if (l) S = (S - 1LL * h2[l - 1] * p_pow2[r - l + 1] % mod[1] + mod[1]) % mod[1];
     return {F, S};
+  }
+
+  pair < T, T > at(T pos) {
+    return get_hash(pos, pos);
   }
  
 };
