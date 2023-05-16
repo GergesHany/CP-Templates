@@ -18,7 +18,6 @@
  ### Data Structures
 - [Trie](https://github.com/GergesHany/CP-Templates/blob/master/Trie.cpp)
 - [binary trie](https://github.com/GergesHany/CP-Templates/blob/master/binary_trie.cpp)
-- [Disjoint Set Union](https://github.com/GergesHany/CP-Templates/blob/master/Dsu.cpp)
 - [monotonic stack](https://github.com/GergesHany/CP-Templates/blob/master/monotonic%20stack.cpp)
 - [Disjoint Set Union](https://github.com/GergesHany/CP-Templates/blob/master/DSU.cpp)
 
