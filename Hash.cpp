@@ -44,5 +44,9 @@ template < typename T = long long > struct Hash {
   pair < T, T > at(T pos) {
     return get_hash(pos, pos);
   }
+
+  bool is_same(T l1, T r1, T l2, T r2) {
+    return get_hash(l1, r1) == get_hash(l2, r2);
+  }
  
 };
