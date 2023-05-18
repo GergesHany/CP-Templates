@@ -1,5 +1,10 @@
- ## Competitive Programming Templates 
+ ## Competitive Programming Templates
 
+ 
+### This is a template to use for competitive programming contests
+ 
+<hr><br> 
+ 
  
 ## String Algorithm
 - [Kmp](https://github.com/GergesHany/CP-Templates/blob/master/KMP.cpp)
