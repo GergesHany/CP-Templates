@@ -49,4 +49,11 @@ template < typename T = long long > struct Hash {
     return get_hash(l1, r1) == get_hash(l2, r2);
   }
  
+  pair < T, T > merge(T l1, T r1, T l2, T r2) {
+    auto h1 = get_hash(l1, r1), h2 = get_hash(l2, r2);
+    T F = (1LL * h1.first * p_pow1[r2 - l2 + 1] % mod[0] + h2.first) % mod[0];
+    T S = (1LL * h1.second * p_pow2[r2 - l2 + 1] % mod[1] + h2.second) % mod[1];
+    return {F, S};
+  }
+ 
 };
