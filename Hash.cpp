@@ -22,7 +22,7 @@ template < typename T = long long > struct Hash {
       h2[i] = (1LL * h2[i - 1] * p[1] + s[i] - 'a' + 1) % mod[1];
     }
   }
-
+ 
   void build(vector < T > &v) {    
     h1[0] = h2[0] = v[0];
     for (T i = 1; i < sz(v); i++) {
@@ -30,7 +30,7 @@ template < typename T = long long > struct Hash {
       h2[i] = (1LL * h2[i - 1] * p[1] + v[i]) % mod[1];
     }
   }
-
+ 
   pair < T, T > get_hash(T l, T r) {
     // first = hash of s[l..r] based on p1
     T F = h1[r];
@@ -40,11 +40,11 @@ template < typename T = long long > struct Hash {
     if (l) S = (S - 1LL * h2[l - 1] * p_pow2[r - l + 1] % mod[1] + mod[1]) % mod[1];
     return {F, S};
   }
-
+ 
   pair < T, T > at(T pos) {
     return get_hash(pos, pos);
   }
-
+ 
   bool is_same(T l1, T r1, T l2, T r2) {
     return get_hash(l1, r1) == get_hash(l2, r2);
   }
@@ -54,6 +54,20 @@ template < typename T = long long > struct Hash {
     T F = (1LL * h1.first * p_pow1[r2 - l2 + 1] % mod[0] + h2.first) % mod[0];
     T S = (1LL * h1.second * p_pow2[r2 - l2 + 1] % mod[1] + h2.second) % mod[1];
     return {F, S};
+  }
+ 
+ 
+  void update(T pos, T val, T old_val) {
+    T diff = val - old_val;
+    for (T i = pos; i < N; i++) {
+      h1[i] = (h1[i] + 1LL * diff * p_pow1[i - pos]) % mod[0];
+      h2[i] = (h2[i] + 1LL * diff * p_pow2[i - pos]) % mod[1];
+    }
+  }
+ 
+  void update(T pos, T val) {
+    T old_val = at(pos).first;
+    update(pos, val, old_val);
   }
  
 };
