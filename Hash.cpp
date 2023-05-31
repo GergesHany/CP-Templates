@@ -57,17 +57,12 @@ template < typename T = long long > struct Hash {
   }
  
  
-  void update(T pos, T val, T old_val) {
-    T diff = val - old_val;
+  void update(T pos, T val) {
+    T diff = val - at(pos).first;
     for (T i = pos; i < N; i++) {
       h1[i] = (h1[i] + 1LL * diff * p_pow1[i - pos]) % mod[0];
       h2[i] = (h2[i] + 1LL * diff * p_pow2[i - pos]) % mod[1];
     }
-  }
- 
-  void update(T pos, T val) {
-    T old_val = at(pos).first;
-    update(pos, val, old_val);
   }
  
 };
