@@ -28,18 +28,5 @@ template < typename T = int > struct Linear_Sieve{
     return fac;
   }
 
-  // function to generate all divisors of a number n on O(2 ^ (number of prime factors of n))
-  set < T > divisors(T n){
-    ste < T > divs = {1};
-    vector < T > fac = factorize(n);
-    for (T i = 0, j, sz; i < (1 << sz(fac)); ++i){
-      for (j = 0, sz = 1; j < sz(fac); ++j){
-        if (i & (1 << j)) sz *= fac[j];
-      }
-      divs.insert(sz);
-    }
-    return divs;
-  }
-
 };
 
