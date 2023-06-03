@@ -15,7 +15,7 @@ template < typename T = int > struct Modulo_multiplicative_inverse{
      return (a % mod * b % mod) % mod;
   };
  
-  Modulo_multiplicative_inverse(T n, T r, T Mod) : n(n), r(r), Mod(Mod) {
+  Modulo_multiplicative_inverse(T n, T Mod) : n(n), Mod(Mod) {
     fact = vector < T > (n + 1, 1);
     inv_fact = vector < T > (n + 1, 1);
     for (T i = 1; i <= n; i++) fact[i] = Take_mod(fact[i - 1], i);
@@ -53,13 +53,12 @@ template < typename T = int > struct Modulo_multiplicative_inverse{
 
 int main()
 {
-  
+
 
   ll n, r;
   cin >> n >> r;
 
-  Modulo_multiplicative_inverse < ll > P;
-  P = Modulo_multiplicative_inverse < ll > (n, r, mod);
+  Modulo_multiplicative_inverse < ll > P(n, mod);
 
   cout << P.nCr(n, r) << "\n";
   cout << P.nPr(n, r) << "\n";
