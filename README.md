@@ -48,6 +48,7 @@
 - [Miller Rabin Primality](https://github.com/GergesHany/CP-Templates/blob/master/Miller_Rabin_Primality.cpp)
 - [Modulo multiplicative inverse](https://github.com/GergesHany/CP-Templates/blob/master/Modulo_multiplicative_inverse.cpp)
 - [Sieve prime factorization](https://github.com/GergesHany/CP-Templates/blob/master/Seive%20Prime%20Factors.cpp)
+- [Linear_Sieve](https://github.com/GergesHany/CP-Templates/blob/master/Linear_Sieve.cpp)
 
 <hr>
 <br><br>
