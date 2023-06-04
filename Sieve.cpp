@@ -2,32 +2,34 @@ typedef long long ll;
 #include <bits/stdc++.h>
 using namespace std;
 
-template < typename T = int > struct Seive{
+template < typename T = int > struct Sieve{
 
     
-  Seive() = default;  
+  Sieve() = default;  
 
   vector < T > primes;
   vector < bool > is_prime;
   
-  // check the number 
-  Seive(int n){
+  // constructor to build the seive
+  Seive(T n){
     is_prime = vector < bool > (n + 1, true);
     is_prime[0] = is_prime[1] = false;
-    for(ll i = 2; i * i <= n; i++)
-      if(is_prime[i])
-        for(ll j = i * 2; j <= n; j += i)
-          is_prime[j] = false;
+    for(ll i = 2; i * i <= n; i++){
+        if(is_prime[i]){
+            for(ll j = i * i; j <= n; j += i)
+                is_prime[j] = false;
+        }
+    }
   }
 
-  // build function to get all prime number from 1 to n 
-  void get_primes(int n){
+  // get all the prime numbers
+  void get_primes(T n){
       for(int i = 2; i <= n; i++) 
           if(is_prime[i])          
               primes.push_back(i);
   }
 
-  // print a prime number 
+  // display all the prime numbers
   void display(){
       for(auto prime_number: primes)
             cout << prime_number << " ";
