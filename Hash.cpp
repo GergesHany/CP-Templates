@@ -56,7 +56,6 @@ template < typename T = long long > struct Hash {
     return {F, S};
   }
  
- 
   void update(T pos, T val) {
     T diff = val - at(pos).first;
     for (T i = pos; i < N; i++) {
