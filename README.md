@@ -19,7 +19,6 @@
  
  
  
- 
  ### Data Structures
 - [Trie](https://github.com/GergesHany/CP-Templates/blob/master/Trie.cpp)
 - [binary trie](https://github.com/GergesHany/CP-Templates/blob/master/binary_trie.cpp)
@@ -42,13 +41,13 @@
 
 ### Math and Number Theory
 - [Math](https://github.com/GergesHany/CP-Templates/blob/master/some_math.cpp)
-- [Seive](https://github.com/GergesHany/CP-Templates/blob/master/Seive.cpp)
+- [Sieve](https://github.com/GergesHany/CP-Templates/blob/master/Sieve.cpp)
 - [factorization](https://github.com/GergesHany/CP-Templates/blob/master/factorization.cpp)
-- [Linear_Sieve](https://github.com/GergesHany/CP-Templates/blob/master/Linear_Sieve.cpp)
+- [Linear Sieve](https://github.com/GergesHany/CP-Templates/blob/master/Linear_Sieve.cpp)
 - [some theories](https://github.com/GergesHany/CP-Templates/blob/master/some_theories.cpp)
 - [Miller Rabin Primality](https://github.com/GergesHany/CP-Templates/blob/master/Miller_Rabin_Primality.cpp)
-- [Modulo multiplicative inverse](https://github.com/GergesHany/CP-Templates/blob/master/Modulo_multiplicative_inverse.cpp)
 - [Sieve prime factorization](https://github.com/GergesHany/CP-Templates/blob/master/Seive%20Prime%20Factors.cpp)
+- [Modulo multiplicative inverse](https://github.com/GergesHany/CP-Templates/blob/master/Modulo_multiplicative_inverse.cpp)
 
 <hr>
 <br><br>
