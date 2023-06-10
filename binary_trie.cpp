@@ -1,6 +1,9 @@
 
 template < int LOG = 0 > struct Trie{
   
+  char base_char[4] = {'a', 'A', '0', '0'};
+  constexpr static int sz[4] = {26, 26, 10, 2}; 
+  
   struct node{
   
     int freq;
