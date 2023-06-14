@@ -1,4 +1,4 @@
- ## Competitive Programming Templates
+ ## `Competitive Programming Templates`
 
  
 ### `This is a template to use for competitive programming contests`
