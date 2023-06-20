@@ -28,7 +28,7 @@ ll F(ll n){
 }
 
 ll ternary_search(ll L, ll R){
-  ld l = L, r = R, EPS = 1e-9;
+  ld l = L, r = R;
   while(r - l > 5){ 
       ld g = l + (r - l) / 3, h = r - (r - l) / 3;
       if(F(g) == F(h)) l = g, r = h;
