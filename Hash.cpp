@@ -1,67 +1,69 @@
-template < typename T = long long > struct Hash {
+template < typename T = long long , int Base = 0 > struct Hash {
  
-  T N;
-  const int p[2] = {31, 37};
-  const int mod[2] = {1000000007, 1000000009};
+  const T p[2] = {31, 37};
+  const T mod[2] = {1000000007, 1000000009};
   vector < T > h1, h2,  p_pow1, p_pow2;
  
-  Hash(T N){
-    this -> N = N;
-    h1 = h2 = p_pow1 = p_pow2 = vector < T > (N);
-    p_pow1[0] = p_pow2[0] = 1;
-    for (T i = 1; i < N; i++) {
-      p_pow1[i] = (1LL * p_pow1[i - 1] * p[0]) % mod[0];
-      p_pow2[i] = (1LL * p_pow2[i - 1] * p[1]) % mod[1];
+  // calculate the powers of p
+  void build_powers(T N){
+    p_pow1 = p_pow2 = vector < T > (N + 1, 1);
+    for (int i = 1; i <= N; ++i) {
+      p_pow1[i] = (p_pow1[i - 1] * p[0]) % mod[0];
+      p_pow2[i] = (p_pow2[i - 1] * p[1]) % mod[1];
+    }    
+  }
+ 
+  // calculate the hash of a vector
+  Hash(const vector < T > & v){
+    int n = sz(v);
+    build_powers(n + 5);
+    h1 = h2 = vector < T > (n + 5, 0);
+    h1[0] = h2[0] = 1;
+    for(int i = 1; i <= n; i++) {
+      h1[i] = (h1[i - 1] * p[0] + v[i - !Base]) % mod[0];
+      h2[i] = (h2[i - 1] * p[1] + v[i - !Base]) % mod[1];
     }
   }
  
-  void build(string &s) {    
-    h1[0] = h2[0] = s[0] - 'a' + 1;
-    for (T i = 1; i < sz(s); i++) {
-      h1[i] = (1LL * h1[i - 1] * p[0] + s[i] - 'a' + 1) % mod[0];
-      h2[i] = (1LL * h2[i - 1] * p[1] + s[i] - 'a' + 1) % mod[1];
+  // calculate the hash of a string
+  Hash(const string s){
+    int n = sz(s);
+    build_powers(n + 5);
+    h1 = h2 = vector < T > (n + 5, 0);
+    h1[0] = h2[0] = 1;
+    for(int i = 1; i <= n; i++) {
+      h1[i] = (h1[i - 1] * p[0] + s[i - !Base]) % mod[0];
+      h2[i] = (h2[i - 1] * p[1] + s[i - !Base]) % mod[1];
     }
   }
  
-  void build(vector < T > &v) {    
-    h1[0] = h2[0] = v[0];
-    for (T i = 1; i < sz(v); i++) {
-      h1[i] = (1LL * h1[i - 1] * p[0] + v[i]) % mod[0];
-      h2[i] = (1LL * h2[i - 1] * p[1] + v[i]) % mod[1];
-    }
-  }
- 
-  pair < T, T > get_hash(T l, T r) {
-    // first = hash of s[l..r] based on p1
-    T F = h1[r];
-    if (l) F = (F - 1LL * h1[l - 1] * p_pow1[r - l + 1] % mod[0] + mod[0]) % mod[0];
-    // second = hash of s[l..r] based on p2
-    T S = h2[r];
-    if (l) S = (S - 1LL * h2[l - 1] * p_pow2[r - l + 1] % mod[1] + mod[1]) % mod[1];
-    return {F, S};
-  }
- 
-  pair < T, T > at(T pos) {
+  // calculate the hash of the position pos
+  pair < T, T > at(T pos){
     return get_hash(pos, pos);
   }
  
-  bool is_same(T l1, T r1, T l2, T r2) {
-    return get_hash(l1, r1) == get_hash(l2, r2);
+  // calculate the hash of the substring s[l..r]
+  pair < T, T > get_hash(T l, T r) {
+    // hash of s[l..r] based on p1
+    T F = h1[r];
+    F -= h1[l - 1] * p_pow1[r - l + 1], F = ((F % mod[0]) + mod[0]) % mod[0];
+    
+    // hash of s[l..r] based on p1
+    T S = h2[r];
+    S -= h2[l - 1] * p_pow2[r - l + 1], S = ((S % mod[1]) + mod[1]) % mod[1];
+    return {F, S};
   }
  
+  bool is_same(T l1, T r1, T l2, T r2){
+    return get_hash(l1, r1) == get_hash(l2, r2);
+  }
+  
+  // merge the hashes of two substrings s1[l1..r1] and s2[l2..r2]
   pair < T, T > merge(T l1, T r1, T l2, T r2) {
     auto h1 = get_hash(l1, r1), h2 = get_hash(l2, r2);
     T F = (1LL * h1.first * p_pow1[r2 - l2 + 1] % mod[0] + h2.first) % mod[0];
     T S = (1LL * h1.second * p_pow2[r2 - l2 + 1] % mod[1] + h2.second) % mod[1];
     return {F, S};
-  }
- 
-  void update(T pos, T val) {
-    T diff = val - at(pos).first;
-    for (T i = pos; i < N; i++) {
-      h1[i] = (h1[i] + 1LL * diff * p_pow1[i - pos]) % mod[0];
-      h2[i] = (h2[i] + 1LL * diff * p_pow2[i - pos]) % mod[1];
-    }
   }
  
 };
