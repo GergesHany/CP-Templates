@@ -17,8 +17,7 @@ template < typename T = long long , int Base = 0 > struct Hash {
   Hash(const vector < T > & v){
     int n = sz(v);
     build_powers(n + 5);
-    h1 = h2 = vector < T > (n + 5, 0);
-    h1[0] = h2[0] = 1;
+    h1 = h2 = vector < T > (n + 5, 1);
     for(int i = 1; i <= n; i++) {
       h1[i] = (h1[i - 1] * p[0] + v[i - !Base]) % mod[0];
       h2[i] = (h2[i - 1] * p[1] + v[i - !Base]) % mod[1];
@@ -29,8 +28,7 @@ template < typename T = long long , int Base = 0 > struct Hash {
   Hash(const string s){
     int n = sz(s);
     build_powers(n + 5);
-    h1 = h2 = vector < T > (n + 5, 0);
-    h1[0] = h2[0] = 1;
+    h1 = h2 = vector < T > (n + 5, 1);
     for(int i = 1; i <= n; i++) {
       h1[i] = (h1[i - 1] * p[0] + s[i - !Base]) % mod[0];
       h2[i] = (h2[i - 1] * p[1] + s[i - !Base]) % mod[1];
