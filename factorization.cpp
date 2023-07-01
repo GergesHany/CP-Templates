@@ -111,4 +111,34 @@ struct factorization{
   
   // -----------------------------------------------------------------------------------------------------------------------------------
 
-};
+    const int N = 1e7 + 5;
+    int spf[N]; // smallest prime factor
+     
+    void sieve() {
+        spf[0] = spf[1] = 1;
+        for(int i = 2; i < N; i++) spf[i] = i;
+        for (int i = 2; i * i <= N; i++) {
+            if (spf[i] == i) {
+                for (int j = i * i; j < N; j += i) {
+                    if (spf[j] == j) spf[j] = i;
+                }
+            }
+        }
+    }
+     
+    vector<int> divs;
+    void find_divs(int idx, int prod_so_far, vector<pair<int, int>>& prime_fact) {
+        if (idx == prime_fact.size()) {
+            divs.emplace_back(prod_so_far);
+            return;
+        }
+          int p_pow = 1;
+          for (int i = 0; i <= prime_fact[idx].second; i++) {
+              find_divs(idx + 1, p_pow * prod_so_far, prime_fact);
+              p_pow *= prime_fact[idx].first;
+          }
+      }
+
+
+
+    };
