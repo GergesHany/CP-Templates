@@ -16,7 +16,17 @@
  - [Big integer](https://github.com/GergesHany/CP-Templates/blob/master/Big%20integer.cpp)
  
  <hr>
+
+
+
+ ## Graphs
  
+- [Bridges](https://github.com/GergesHany/CP-Templates/blob/master/Bridges.cpp)
+- [Tarjan algorithm](https://github.com/GergesHany/CP-Templates/blob/master/Tarjan_algorithm.cpp)
+- [Articulation points](https://github.com/GergesHany/CP-Templates/blob/master/Articulation_points.cpp) 
+ 
+ <hr>
+  
  
  
  ### Data Structures
