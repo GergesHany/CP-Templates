@@ -22,6 +22,7 @@
  ## Graphs
  
 - [Bridges](https://github.com/GergesHany/CP-Templates/blob/master/Bridges.cpp)
+- [Bfs_and_Dfs](https://github.com/GergesHany/CP-Templates/blob/master/Bfs_and_Dfs%20.cpp)
 - [Tarjan algorithm](https://github.com/GergesHany/CP-Templates/blob/master/Tarjan_algorithm.cpp)
 - [Articulation points](https://github.com/GergesHany/CP-Templates/blob/master/Articulation_points.cpp) 
  
