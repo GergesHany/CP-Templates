@@ -1,3 +1,4 @@
+// Bridges is a node that if removed, the graph will be disconnected.
 template < typename T = int > struct Bridges{
 
   T dfs_timer;
