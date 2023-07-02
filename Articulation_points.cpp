@@ -1,3 +1,4 @@
+// Articulation points is a vertex in a graph, that if removed, will make the graph disconnected.
 template < typename T = int > struct Articulation_points{
 
   T dfs_timer;
