@@ -4,7 +4,9 @@ template < typename T = int > struct Tarjan_algorithm{
   T dfs_timer, num_scc;
   vector < T > dfs_num, dfs_low, vis, comp;
   vector < vector < T > > adj, components_graph, scc;
- 
+
+  Tarjan_algorithm() = default;
+
   Tarjan_algorithm(T n){
     dfs_timer = num_scc = 0;
     adj = vector < vector < T > > (n + 1);
