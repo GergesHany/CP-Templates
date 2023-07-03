@@ -6,6 +6,8 @@ template < typename T = int > struct Bridges{
   vector < pair < T, T > > bridges;
   vector < T > dfs_num, dfs_low, vis;
 
+  Bridges() = default;
+
   Bridges(T n){
     dfs_timer = 0;
     adj = vector < vector < T > > (n + 1);
