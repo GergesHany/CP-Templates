@@ -6,6 +6,8 @@ template < typename T = int > struct Articulation_points{
   vector < vector < T > > adj;
   set < T > articulation_points;
 
+  Articulation_points() = default;
+
   Articulation_points(T n){
     dfs_timer = 0;
     adj = vector < vector < T > > (n + 1);
