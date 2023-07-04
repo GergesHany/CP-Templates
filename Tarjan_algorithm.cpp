@@ -67,5 +67,9 @@ template < typename T = int > struct Tarjan_algorithm{
   vector < vector < T > > SCC(){
     return scc;
   }
+
+  bool is_ancestor(T u, T v){
+    return (dfs_num[u] <= dfs_num[v] && dfs_low[u] >= dfs_low[v]);
+  }
  
 };
