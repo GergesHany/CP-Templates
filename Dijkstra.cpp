@@ -23,7 +23,7 @@ template < typename T = int > struct Dijkstra{
   // constructor to initialize the graph
   Dijkstra(T n, T m, bool dir = true) : n(n), m(m), adj(n + 1), dist(n + 1, INF), par(n + 1, -1) {
     for (T i = 0, u, v, w; i < m && cin >> u >> v >> w; ++i){
-      addEdge(u, v, 2 * w, dir);
+      addEdge(u, v, w, dir);
     }
   }
  
