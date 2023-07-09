@@ -49,7 +49,7 @@ template < typename T = int > struct Dijkstra{
   vector < T > shortestPath(vector < T > src){
     priority_queue < Edge > pq;
     for (T i = 0; i < sz(src); ++i){
-      pq.push({src[i], dist[src[i]] = price[src[i]]});
+      pq.push({src[i], dist[src[i]] = 0});
     }
     while (!pq.empty()){
       Edge e = pq.top(); pq.pop();
