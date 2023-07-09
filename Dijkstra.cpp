@@ -43,5 +43,15 @@ template < typename T = int > struct Dijkstra{
     return shortestPath(src)[dest]; 
   }
 
-};
+  vector < T > path(T src, T dest){
+    shortestPath(src);
+    vector < T > path;
+    for (T i = dest; i != src; i = par[i]){
+      path.push_back(i);
+    }
+    path.push_back(src);
+    reverse(all(path));
+    return path;
+  }
 
+};
