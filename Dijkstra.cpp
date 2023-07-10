@@ -10,7 +10,7 @@ template < typename T = int > struct Dijkstra{
   // default constructor
   Dijkstra() = default;
  
-  T n, m;
+  T n, m, INF = 1LL << 60;
   vector < T > dist, par;
   vector < vector < Edge > > adj;
  
