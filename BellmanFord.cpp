@@ -15,13 +15,13 @@ template < typename T = int > struct BellmanFord{
   vector < Edge > edges;
  
   // add edge
-  void addEdge(T u, T v, T w, bool bidirectional = true){
+  void addEdge(T u, T v, T w, bool bidirectional = false){
     edges.push_back({u, v, w});
     if (bidirectional) edges.push_back({v, u, w});
   }
  
   // constructor to initialize the graph
-  BellmanFord(T n, T m, bool dir = true) : n(n), m(m), dist(n + 1, INF), par(n + 1, -1) {
+  BellmanFord(T n, T m, bool dir = false) : n(n), m(m), dist(n + 1, INF), par(n + 1, -1) {
     for (T i = 0, u, v, w; i < m && cin >> u >> v >> w; ++i){
       addEdge(u, v, w, dir);
     }
