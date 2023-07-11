@@ -60,9 +60,14 @@ template < typename T = int > struct BellmanFord{
   }
 
   // return true if there is a negative cycle in the path from source to target
+  // return true if there is a negative cycle in the path from source to target
   bool negativeCycle(T source, T target){
     if (!WasProcessed) shortestPath(source);
-    return dist[target] < 0;
+    vector < T > temp = dist;
+    for (auto &e : edges)
+      if (temp[e.U] + e.W < temp[e.V])
+        temp[e.V] = temp[e.U] + e.W;
+    return temp[target] < dist[target];
   }
 
   // return the path from source to target
