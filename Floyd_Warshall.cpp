@@ -1,12 +1,13 @@
 template < typename T = int > struct Floyd_Warshall{
 
   struct Edge{
-    T u, v, w;
-    Edge(T u = 0, T v = 0, T w = 0) : u(u), v(v), w(w) {}
+    ll u, v, w;
+    Edge(ll U = 0, ll V = 0, ll W = 0) : u(U), v(V), w(W) {}
     bool operator < (const Edge &other) const{
       return w < other.w;
     }
   };
+ 
 
   T n, m, INT = 1LL << 60;
   vector < Edge > edges;
