@@ -23,6 +23,7 @@
  
 - [Bridges](https://github.com/GergesHany/CP-Templates/blob/master/Bridges.cpp)
 - [Dijkstra](https://github.com/GergesHany/CP-Templates/blob/master/Dijkstra.cpp)
+- [BellmanFord](https://github.com/GergesHany/CP-Templates/blob/master/BellmanFord.cpp)
 - [Bfs and Dfs](https://github.com/GergesHany/CP-Templates/blob/master/Bfs_and_Dfs%20.cpp)
 - [Floyd Warshall](https://github.com/GergesHany/CP-Templates/blob/master/Floyd_Warshall.cpp)
 - [Tarjan algorithm](https://github.com/GergesHany/CP-Templates/blob/master/Tarjan_algorithm.cpp)
