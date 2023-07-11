@@ -8,7 +8,6 @@ template < typename T = int > struct Floyd_Warshall{
     }
   };
  
-
   T n, m, INT = 1LL << 60;
   vector < Edge > edges;
   vector < vector < T > > dist;
