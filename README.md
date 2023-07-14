@@ -1,7 +1,7 @@
- ## `Competitive Programming Templates`
+ ## Competitive Programming Templates
 
  
-### `This is a template to use for competitive programming contests`
+### This is a template to use for competitive programming contests
 
 <hr><br> 
  
