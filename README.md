@@ -60,8 +60,8 @@
 - [Linear Sieve](https://github.com/GergesHany/CP-Templates/blob/master/Linear_Sieve.cpp)
 - [factorization](https://github.com/GergesHany/CP-Templates/blob/master/factorization.cpp)
 - [some theories](https://github.com/GergesHany/CP-Templates/blob/master/some_theories.cpp)
-- [Sieve of Eratosthenes](https://github.com/GergesHany/CP-Templates/blob/master/Sieve%20of%20Eratosthenes.cpp)
 - [Miller Rabin Primality](https://github.com/GergesHany/CP-Templates/blob/master/Miller_Rabin_Primality.cpp)
+- [Sieve of Eratosthenes](https://github.com/GergesHany/CP-Templates/blob/master/Sieve%20of%20Eratosthenes.cpp)
 - [Modulo multiplicative inverse](https://github.com/GergesHany/CP-Templates/blob/master/Modulo_multiplicative_inverse.cpp)
 
 <hr>
