@@ -254,6 +254,34 @@ struct Some_Math{
       return (-1 + sqrt(1 + 8 * sum)) / 2;
     }
 
+    // (2 4 6 8) , (1 3 5 7) , (1 4 7 10) .....
+    // summation of arithmetic sequence increase with constant number
+    ll arithmetic_summation(ll first = 1, ll last = 1){
+      ll x = last - first + 1;
+      return ((first + last) * x) / 2;
+    }
+    
+    // (1 4 16), (1 3 9)...
+    // get kth element in sequence increase by multiple of constant
+    ll kth(ll first, ll ratio, ll k){
+      // ratio -> the constant number
+      auto fast_pow = [&](ll base, ll power){
+        ll res = 1;
+        while(power){
+          if(power & 1) res = (res * base);
+          base = (base * base);
+          power >>= 1;
+        }
+        return res;
+      };
+      return first * fast_pow(ratio, k - 1);
+    }
+    
+    // 1 4 16 ,, 1 3 9...
+    // get summation of geometry sequence increase by multiple of constant
+    ll geometry_summation(ll first, ll ratio, int number_of_element){
+      return ((first * (1 - pow(ratio, number_of_element))) / (1 - ratio));
+    }
 
     
     // ----------------> some notes ---------------->>
@@ -281,7 +309,7 @@ struct Some_Math{
     // n! % x == 0 for all x <= n
     // 2! is onle prime factorization 
     // count number of prime 1 to n ->> ~= n / log(n) 
-    // wilson theorem for prime numbers (n - 1)! % n = n - 1 if n is prime
+    // Wilson theorem for prime numbers (n - 1)! % n = n - 1 if n is prime
     // The perfect square number the prime factorization of the number is even and the number of divisors is odd
 
 
