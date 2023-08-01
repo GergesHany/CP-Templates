@@ -110,7 +110,7 @@ template < typename T = int , bool Base = 0 > struct Segment_Tree {
     return out;
   }
 
-  // Segment_Tree < ll > st(size of vector, vector, Default value);
+  // Segment_Tree < data type, Base of vector > st(size of vector, vector, Default value);
 
 };
 
