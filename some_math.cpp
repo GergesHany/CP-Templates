@@ -278,12 +278,19 @@ struct Some_Math{
     }
     
     // 1 4 16 ,, 1 3 9...
-    // get summation of geometry sequence increase by multiple of constant
+    // get a summation of geometry sequence increase by a multiple of a constant
     ll geometry_summation(ll first, ll ratio, int number_of_element){
       return ((first * (1 - pow(ratio, number_of_element))) / (1 - ratio));
     }
 
-    
+    // number of ways to make a vector of size n and the maximum element is x
+    auto number_of_ways = [&](ll x) -> ll {
+      ll ans = fast_pow(x, m) - fast_pow(x - 1, m);
+      ans = (ans + mod) % mod;
+      return ans;
+    };
+
+        
     // ----------------> some notes ---------------->>
     // ceill(x, y) = (x + y - 1) / y;
     // round x > 0 ? (x + y / 2) / y : (x - y / 2) / y;
