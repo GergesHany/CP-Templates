@@ -5,7 +5,7 @@ template < typename T = long long , int Base = 0 > struct Hash {
   vector < T > h1, h2,  p_pow1, p_pow2;
  
   // calculate the powers of p
-  void build_powers(T N){
+  void build_powers(const T &N){
     p_pow1 = p_pow2 = vector < T > (N + 1, 1);
     for (int i = 1; i <= N; ++i) {
       p_pow1[i] = (p_pow1[i - 1] * p[0]) % mod[0];
@@ -25,7 +25,7 @@ template < typename T = long long , int Base = 0 > struct Hash {
   }
  
   // calculate the hash of a string
-  Hash(const string s){
+  Hash(const string &s){
     int n = sz(s);
     build_powers(n + 5);
     h1 = h2 = vector < T > (n + 5, 1);
@@ -36,12 +36,12 @@ template < typename T = long long , int Base = 0 > struct Hash {
   }
  
   // calculate the hash of the position pos
-  pair < T, T > at(T pos){
+  pair < T, T > at(constT &pos){
     return get_hash(pos, pos);
   }
  
   // calculate the hash of the substring s[l..r]
-  pair < T, T > get_hash(T l, T r) {
+  pair < T, T > get_hash(const T &l, const T &r) {
     // hash of s[l..r] based on p1
     T F = h1[r];
     F -= h1[l - 1] * p_pow1[r - l + 1], F = ((F % mod[0]) + mod[0]) % mod[0];
@@ -52,12 +52,12 @@ template < typename T = long long , int Base = 0 > struct Hash {
     return {F, S};
   }
  
-  bool is_same(T l1, T r1, T l2, T r2){
+  bool is_same(const T &l1, const T &r1, const T &l2, const T &r2){
     return get_hash(l1, r1) == get_hash(l2, r2);
   }
   
   // merge the hashes of two substrings s1[l1..r1] and s2[l2..r2]
-  pair < T, T > merge(T l1, T r1, T l2, T r2) {
+  pair < T, T > merge(const T &l1, const T &r1, const T &l2, const T &r2) {
     auto h1 = get_hash(l1, r1), h2 = get_hash(l2, r2);
     T F = (1LL * h1.first * p_pow1[r2 - l2 + 1] % mod[0] + h2.first) % mod[0];
     T S = (1LL * h1.second * p_pow2[r2 - l2 + 1] % mod[1] + h2.second) % mod[1];
