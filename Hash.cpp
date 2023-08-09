@@ -1,6 +1,6 @@
 template < typename T = long long , int Base = 0 > struct Hash {
  
-  const T p[2] = {31, 37};
+  const T p[2] = {31, 313};
   const T mod[2] = {1000000007, 1000000009};
   vector < T > h1, h2,  p_pow1, p_pow2;
  
