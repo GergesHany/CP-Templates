@@ -284,8 +284,8 @@ struct Some_Math{
     }
 
     // number of ways to make a vector of size n and the maximum element is x
-    auto number_of_ways = [&](ll x) -> ll {
-      ll ans = fast_pow(x, m) - fast_pow(x - 1, m);
+    auto number_of_ways = [&](ll x, int n) -> ll {
+      ll ans = fast_pow(x, n) - fast_pow(x - 1, n);
       ans = (ans + mod) % mod;
       return ans;
     };
