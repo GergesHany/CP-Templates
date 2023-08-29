@@ -100,7 +100,7 @@ template < typename T = int, bool Mode = 0 > struct Binary_Heap {
 
    // Update (Change value)
     void update(int i, T val){
-        if(i > size) return;
+        if(i > size || i < 0) return void(cout << "Invalid Index\n");
         heap[i] = val;
         Fix_Heap(i);
     }
