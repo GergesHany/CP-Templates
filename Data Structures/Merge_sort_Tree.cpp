@@ -74,7 +74,7 @@ template < typename T = int > struct Merge_sort_Tree{
     if (start > r || end < l) return 0;
     if (start >= l && end <= r){
       int idx = upper_bound(all(Tree[node]), k) - Tree[node].begin();
-      return idx;
+      return sz(Tree[idx]) - idx;
     }
     int mid = (start + end) >> 1;
     return query(node << 1, start, mid, l, r, k) + query(node << 1 | 1, mid + 1, end, l, r, k);
