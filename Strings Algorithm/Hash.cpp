@@ -36,7 +36,7 @@ template < typename T = long long , int Base = 0 > struct Hash {
   }
  
   // calculate the hash of the position pos
-  pair < T, T > at(constT &pos){
+  pair < T, T > at(const T &pos){
     return get_hash(pos, pos);
   }
  
