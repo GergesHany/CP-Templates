@@ -43,6 +43,21 @@ template < typename T = int > struct Big_number{
     return true;
   }
 
+  T number_of_divisors(){
+    T ans = 1;
+    for (auto &i : primes) ans *= (i.second + 1);
+    return ans;
+  }
+
+    T sum_of_divisors(){
+        T ans = 1;
+        for (auto &i : primes){
+          T p = i.first, a = i.second;
+          ans *= (pow(p, a + 1) - 1) / (p - 1);
+        }
+        return ans;
+    }
+
 };
 
 
