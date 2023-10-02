@@ -41,97 +41,90 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 
 template < typename T = int, bool Mode = 0 > struct Binary_Heap {
   
-    int size; 
-    T DEFAULT;
-    vector < T > heap; 
-    
-    void intial(int n){
-        size = 0, DEFAULT = (Mode == 0 ? 1e9 : -1e9);
-        heap = vector < T > (n + 1, DEFAULT);
-    }
+  int size; 
+  T DEFAULT;
+  vector < T > heap; 
   
-    Binary_Heap(int n){
-        intial(n);
-    }
+  void intial(int n){
+      size = 0, DEFAULT = (Mode == 0 ? 1e10 : -1e10);
+      heap = vector < T > (n + 1, DEFAULT);
+  }
+ 
+  Binary_Heap(int n){
+      intial(n);
+  }
   
-    // Main operation to do
+  // Main operation to do
+  bool operation(T a, T b){
+      if(Mode == 0) return a < b; // Min Heap
+      return a > b; // Max Heap
+  }
+ 
+  int left(int i){ return 2 * i; }
+  int right(int i){ return 2 * i + 1; }
+  int parent(int i){ return i / 2; }
+ 
+  // Heapify (Fix Heap)
+ 
+  void heapify(int i, int n){
+      int l = left(i), r = right(i), mn = i;
+      if(l <= n && operation(heap[l], heap[mn])) mn = l;
+      if(r <= n && operation(heap[r], heap[mn])) mn = r;
+      if(mn != i){
+          swap(heap[i], heap[mn]);
+          heapify(mn, n);
+      }
+  }
   
-    bool operation(T a, T b){
-        if(Mode == 0) return a < b; // Min Heap
-        return a > b; // Max Heap
-    }
-
-    int left(int i){ return 2 * i; }
-    int right(int i){ return 2 * i + 1; }
-    int parent(int i){ return i / 2; }
+  // Build Heap (Heapify all nodes)
+  void build_heap(){
+      for(int i = size / 2; i >= 1; i--) heapify(i);
+  }
+ 
+  // Fix Heap (Fix one node)
+  void Fix_Heap(int i){
+      while(i > 1 && operation(heap[i], heap[parent(i)])){
+          swap(heap[i], heap[parent(i)]);
+          i = parent(i);
+      }
+  }
+ 
+  // Insert (Add)
+  void insert(T val){
+      if(size == sz(heap) - 1) return void(cout << "Heap is Full\n");
+      heap[++size] = val;
+      Fix_Heap(size);
+  }
+ 
+  // Update (Change value)
+  void update(int i, T val){
+      if(i > size || i < 0) return void(cout << "Invalid Index\n");
+      heap[i] = val;
+      Fix_Heap(i);
+  }
+ 
+  // Extract (Remove)
+  T extract(){
+      if(size == 0) return DEFAULT;
+      T val = heap[1];
+      heap[1] = heap[size--];
+      heapify(1, size);
+      return val; // return the value of the removed node
+  }
   
-    // Heapify (Fix Heap)
-
-    void heapify(int i, int n){
-        int l = left(i), r = right(i), mn = i;
-        if(l <= n && operation(heap[l], heap[mn])) mn = l;
-        if(r <= n && operation(heap[r], heap[mn])) mn = r;
-        if(mn != i){
-            swap(heap[i], heap[mn]);
-            heapify(mn, n);
-        }
-    }
-  
-    // Build Heap (Heapify all nodes)
-  
-    void build_heap(){
-        for(int i = size / 2; i >= 1; i--) heapify(i);
-    }
-
-   // Fix Heap (Fix one node)
-    void Fix_Heap(int i){
-        while(i > 1 && operation(heap[i], heap[parent(i)])){
-            swap(heap[i], heap[parent(i)]);
-            i = parent(i);
-        }
-    }
-  
-    // Insert (Add)
-    void insert(T val){
-        if(size == sz(heap) - 1) return void(cout << "Heap is Full\n");
-        heap[++size] = val;
-        Fix_Heap(size);
-    }
-
-   // Update (Change value)
-    void update(int i, T val){
-        if(i > size || i < 0) return void(cout << "Invalid Index\n");
-        heap[i] = val;
-        Fix_Heap(i);
-    }
-  
-    // Extract (Remove)
-    T extract(){
-        if(size == 0) return DEFAULT;
-        T val = heap[1];
-        heap[1] = heap[size--];
-        heapify(1);
-        return val; // return the value of the removed node
-    }
-  
-    // Top (Get the value of the top node)
-    T top(){
-      return (size == 0 ? DEFAULT : heap[1]);
-    }
-  
-    // Size
-    int Size(){ return size; }
-  
-    // Empty
-    bool empty(){ return !size; }
-  
-    // Clear
-    void clear(){ size = 0; }
-  
-    // Print
-    void print(){
-        for(int i = 1; i <= size; i++) cout << i << " - " << heap[i] << "\n";
-    }
+  // Top (Get the value of the top node)
+  T top(){
+    return (size == 0 ? DEFAULT : heap[1]);
+  }
+ 
+  // Size
+  int Size(){ return size; }
+ 
+  // Empty
+  bool empty(){ return !size; }
+ 
+  // Clear
+  void clear(){ size = 0; }
   
 };
 
