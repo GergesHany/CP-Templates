@@ -18,15 +18,5 @@ template < typename T = int > struct Linear_Sieve{
     return (n > 1 && lp[n] == n);
   }
 
-  // function to generate all prime factors of a number n on O(log(n))
-  vector < T > factorize(T n){
-    vector < T > fac;
-    while (n > 1){
-      fac.push_back(lp[n]);
-      n /= lp[n];
-    }
-    return fac;
-  }
-
 };
 
