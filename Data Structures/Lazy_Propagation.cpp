@@ -37,94 +37,104 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
   for (const T &x : v) out << x << ' '; return out;
 }
 
-template < typename T = int > struct Lazy_Propagation {
- 
-  struct Node{
-    ll OPERATION, VALUE;
+template < typename T = int, bool Base = false > struct Lazy_Propagation {
+
+  struct Node {
+    T val = 0, update = 0;
+    bool is_lazy = false;
+    Node(T val = 0) : val(val) {}
+    Node operator = (const T &other) {
+      val = other;
+      return *this;
+    }
   };
 
-  int size = 1;
-  vector < Node > Tree;
-  ll OUT_OF_RANGE = 0, NO_OPERATION = 0;
+  int size;
+  vector < Node > tree;
+  T defeault_value, lazy_default_value;
 
-  ll merge(ll a, ll b, ll len){
-    if (a == NO_OPERATION) return b * len;
-    return a + (b * len);
+  void init(int n) {
+    size = 1;
+    while (size < n) size <<= 1;
+    tree = vector < Node > (size << 1);
+    defeault_value = 0, lazy_default_value = 0;
   }
 
-  ll Get(ll a, ll b){
-    return (a + b);
+  Lazy_Propagation(int n = 0) {
+    init(n);
   }
 
-  void intial(int n){
-    while(size < n) size *= 2;
-    Tree = vector < Node > (size * 2);
+  T Lazy_operation(const T &a, const T &b) {
+    return b;
   }
 
-  void propagate(int x, int lx, int rx){
-    if (Tree[x].OPERATION == NO_OPERATION || rx - lx == 1) return;
-    int mid = (lx + rx) / 2;
-    Tree[2 * x + 1].OPERATION = merge(Tree[2 * x + 1].OPERATION, Tree[x].OPERATION, 1);
-    Tree[2 * x + 1].VALUE = merge(Tree[2 * x + 1].VALUE, Tree[x].OPERATION, mid - lx);
-    Tree[2 * x + 2].OPERATION = merge(Tree[2 * x + 2].OPERATION, Tree[x].OPERATION, 1);
-    Tree[2 * x + 2].VALUE = merge(Tree[2 * x + 2].VALUE, Tree[x].OPERATION, rx - mid);
-    Tree[x].OPERATION = NO_OPERATION;
+  Node Tree_operation(const Node &a, const Node &b) {
+    return Node(a.val + b.val);
   }
 
-  void update(int l, int r, ll v, int x, int lx, int rx){
-    propagate(x, lx, rx);
-    if (lx >= r || rx <= l) return;
-    if (lx >= l && rx <= r){
-      Tree[x].OPERATION = merge(Tree[x].OPERATION, v, 1);
-      Tree[x].VALUE = merge(Tree[x].VALUE, v, rx - lx);
+  void propagate(int idx, int lx, int rx) {
+    if (tree[idx].is_lazy == false) return;
+    tree[idx].val = Lazy_operation(tree[idx].val, tree[idx].update);
+    if (lx != rx) {
+      tree[idx << 1].is_lazy = tree[idx << 1 | 1].is_lazy = true;
+      tree[idx << 1].update = Lazy_operation(tree[idx << 1].update, tree[idx].update);
+      tree[idx << 1 | 1].update = Lazy_operation(tree[idx << 1 | 1].update, tree[idx].update);
+    }
+    tree[idx].is_lazy = false;
+    tree[idx].update = lazy_default_value;
+  }
+
+  void build(vector < T > &a, int idx, int lx, int rx) {
+    if ((Base && lx >= sz(a)) || (!Base && lx > sz(a))) return;
+    if (lx == rx) return void(tree[idx] = a[lx - !Base]);
+    int mid = lx + rx >> 1;
+    build(a, idx << 1, lx, mid);
+    build(a, idx << 1 | 1, mid + 1, rx);
+    propagate(idx << 1, lx, mid), propagate(idx << 1 | 1, mid + 1, rx);
+    tree[idx] = Tree_operation(tree[idx << 1], tree[idx << 1 | 1]);
+  }
+
+  void build(vector < T > &a) {
+    build(a, 1, Base, size + Base - 1);
+  }
+
+  void update(int l, int r, T val, int idx, int lx, int rx) {
+    propagate(idx, lx, rx);
+    if (lx > r || rx < l) return;
+    if (lx >= l && rx <= r) {
+      tree[idx].is_lazy = true;
+      tree[idx].update = Lazy_operation(tree[idx].update, val);
+      propagate(idx, lx, rx);
       return;
     }
-    int mid = (lx + rx) / 2;
-    update(l, r, v, 2 * x + 1, lx, mid);
-    update(l, r, v, 2 * x + 2, mid, rx);
-    Tree[x].VALUE = Get(Tree[2 * x + 1].VALUE, Tree[2 * x + 2].VALUE);
+    int mid = lx + rx >> 1;
+    update(l, r, val, idx << 1, lx, mid);
+    update(l, r, val, idx << 1 | 1, mid + 1, rx);
+    tree[idx] = Tree_operation(tree[idx << 1], tree[idx << 1 | 1]);
   }
 
-  void update(int l, int r, ll v){
-    update(l, r, v, 0, 0, size);
+  void update(int l, int r, T val) {
+    update(l, r, val, 1, Base, size + Base - 1);
   }
 
-  ll query(int l, int r, int x, int lx, int rx){
-    propagate(x, lx, rx);
-    if (lx >= r || rx <= l) return OUT_OF_RANGE;
-    if (lx >= l && rx <= r) return Tree[x].VALUE;
-    int mid = (lx + rx) / 2;
-    ll left = query(l, r, 2 * x + 1, lx, mid);
-    ll right = query(l, r, 2 * x + 2, mid, rx);
-    return Get(left, right);
+  Node query(int l, int r, int idx, int lx, int rx) {
+    propagate(idx, lx, rx);
+    if (lx > r || rx < l) return defeault_value;
+    if (lx >= l && rx <= r) return tree[idx];
+    int mid = lx + rx >> 1;
+    return Tree_operation(query(l, r, idx << 1, lx, mid), query(l, r, idx << 1 | 1, mid + 1, rx));
   }
 
-  ll query(int l, int r){
-    return query(l, r, 0, 0, size);
+  T query(int l, int r) {
+    return query(l, r, 1, Base, size + Base - 1).val;
   }
- 
+
+
 };
+
 
 void Accepted(){
   
-  ll n, q;
-  cin >> n >> q;
-  Lazy_Propagation < ll > Tree;
-  Tree.intial(n);
-
-  while(q--){
-    int type;
-    cin >> type;
-    if (type == 1){
-      ll l, r, v;
-      cin >> l >> r >> v;
-      Tree.update(l, r, v);
-    }else{
-      int l, r;
-      cin >> l >> r;
-      cout << Tree.query(l, r) << "\n";
-    }
-  }
 
 }
 
