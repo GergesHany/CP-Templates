@@ -24,18 +24,19 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 
 template < typename T = int > struct LCA {
   
-  T N, LOG = 0;
   vector < T > depth;
+  T N, LOG = 0, DEFAULT;
   vector < vector < T > > anc, cost;
   vector < vector < pair < T, T > > > adj;
 
   LCA(T n = 0){
     N = n + 5;
+    DEFAULT = 0;
     depth = vector < T > (N);
     while ((1 << LOG) <= N) ++LOG;
     adj = vector < vector < pair < T, T > > > (N);
     anc = vector < vector < T > > (N, vector < T > (LOG));
-    cost = vector < vector < T > > (N, vector < T > (LOG, 1e10));
+    cost = vector < vector < T > > (N, vector < T > (LOG, DEFAULT));
   }
 
   inline T operation(T a, T b){
@@ -81,9 +82,9 @@ template < typename T = int > struct LCA {
   }
 
   inline T get_cost(T u, T k){
-    T ans = 1e10;
+    T ans = DEFAULT;
     for (T i = 0; i < LOG; i++) if (k & (1 << i)) {
-      ans = min(ans, cost[u][i]);
+      ans = operation(ans, cost[u][i]);
       u = anc[u][i];
     }
     return ans;
