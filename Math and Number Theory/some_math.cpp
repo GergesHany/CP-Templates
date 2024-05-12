@@ -318,6 +318,8 @@ struct Some_Math{
     // count number of prime 1 to n ->> ~= n / log(n) 
     // Wilson theorem for prime numbers (n - 1)! % n = n - 1 if n is prime
     // The perfect square number the prime factorization of the number is even and the number of divisors is odd
+    
+    // pow(a, x) = pow(a, x % phi(mod))
 
 
     // GCD(1, num) = 1
