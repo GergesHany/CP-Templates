@@ -158,12 +158,19 @@ struct sufiix_array {
     }
     return ans;
   }
-
   // return the kth smallest substring in the string
   inline string kth_substring(int k){
-    int i = 1;
-    while(k > lcp[i]) k -= lcp[i++]; // skip the common prefix of the suffixes
-    return s.substr(p[i], k + lcp[i]); 
+    for (int i = 1; i < n; i++){
+      int len = n - 1 - p[i];
+      if(k > len) k -= len;
+      else return s.substr(p[i], lcp[i] + k);
+    }
+    return "-1";
+  }
+
+  // operator overloading []
+  inline string operator [] (int i){
+    return kth_substring(i);
   }
   
   // return the longest repeated substring in the string
