@@ -45,28 +45,19 @@ template < typename T = int > struct Merge_sort_Tree{
   vector < vector < T > > Tree; 
 
   // merge two sorted arrays
-  vector < T > merge(const vector < T >& a, const vector < T >& b){
+  vector < T > Merge(const vector < T >& a, const vector < T >& b){
     vector < T > ans;
-    int i = 0, j = 0;
-    while (i < sz(a) && j < sz(b)){
-      if (a[i] < b[j]) ans.push_back(a[i++]);
-      else ans.push_back(b[j++]);
-    }
-    while (i < sz(a)) ans.push_back(a[i++]);
-    while (j < sz(b)) ans.push_back(b[j++]);
+    merge(all(a), all(b), back_inserter(ans));
     return ans;
   }
 
   // build the tree
   void build(int node, int start, int end, vector < T >& v){
-    if (start == end){
-      Tree[node].push_back(v[start]);
-      return;
-    }
+    if (start == end) return void(Tree[node].push_back(v[start]));
     int mid = (start + end) >> 1;
     build(node << 1, start, mid, v);
     build(node << 1 | 1, mid + 1, end, v);
-    Tree[node] = merge(Tree[node << 1], Tree[node << 1 | 1]);
+    Tree[node] = Merge(Tree[node << 1], Tree[node << 1 | 1]);
   }
 
   // return the number of elements greater than k in range [l, r]
@@ -74,21 +65,18 @@ template < typename T = int > struct Merge_sort_Tree{
     if (start > r || end < l) return 0;
     if (start >= l && end <= r){
       int idx = upper_bound(all(Tree[node]), k) - Tree[node].begin();
-      return sz(Tree[idx]) - idx;
+      return sz(Tree[node]) - idx;
     }
     int mid = (start + end) >> 1;
     return query(node << 1, start, mid, l, r, k) + query(node << 1 | 1, mid + 1, end, l, r, k);
   }
 
   void update(int node, int start, int end, int pos, int val){
-    if (start == end){
-      Tree[node][0] = val;
-      return;
-    }
+    if (start == end) return void(Tree[node][0] = val);
     int mid = (start + end) >> 1;
     if (pos <= mid) update(node << 1, start, mid, pos, val);
     else update(node << 1 | 1, mid + 1, end, pos, val);
-    Tree[node] = merge(Tree[node << 1], Tree[node << 1 | 1]);
+    Tree[node] = Merge(Tree[node << 1], Tree[node << 1 | 1]);
   }
 
   void update(int pos, int val){
@@ -108,6 +96,9 @@ template < typename T = int > struct Merge_sort_Tree{
   }
 
 };
+
+
+
 
 void Accepted(){  
 
