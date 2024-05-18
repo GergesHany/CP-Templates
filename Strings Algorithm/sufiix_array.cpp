@@ -22,7 +22,7 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
   for (const T &x : v) out << x << ' '; return out;
 }
 
-struct sufiix_array {
+struct suffix_array {
   
   string s;
   int n, LOG;
@@ -33,9 +33,9 @@ struct sufiix_array {
   // p[i] is the index of the ith suffix in lexiographical sorting
   // lcp[i] is the length of the "lcp" of the "i and i+1" suffix in the suffix array
 
-  explicit sufiix_array() = default;
+  explicit suffix_array() = default;
 
-  explicit sufiix_array(string s): s(s), n(sz(s) + 1){
+  explicit suffix_array(string s): s(s), n(sz(s) + 1){
     s += "$"; // '$' less than any char of the string 
     p = c = lcp = vector < int > (n);
     build();
@@ -158,10 +158,11 @@ struct sufiix_array {
     }
     return ans;
   }
+
   // return the kth smallest substring in the string
   inline string kth_substring(int k){
     for (int i = 1; i < n; i++){
-      int len = n - 1 - p[i];
+      int len = n - 1 - p[i]; 
       if(k > len) k -= len;
       else return s.substr(p[i], lcp[i] + k);
     }
@@ -182,7 +183,7 @@ struct sufiix_array {
   // longest common substring of the string and the pattern
   inline string longest_common_substring(const string &s, const string &t){
     string st = s + "#" + t + "$";
-    sufiix_array sa(st);
+    suffix_array sa(st);
     int n = sz(s), ans = 0, idx = 0;
     for (int i = 1; i < sz(st); i++){
       if((sa.p[i] < n and sa.p[i - 1] > n) or (sa.p[i] > n and sa.p[i - 1] < n)){
@@ -195,13 +196,14 @@ struct sufiix_array {
   // longest common prefix of the suffices i and j in the suffix array
   inline int longest_common_prefix(int i, int j){
     if (i == j) return n - i - 1;
-    int l = min(c[i], c[j]), r = max(c[i], c[j]), len = r - l + 1;
+    int l = min(c[i], c[j]), r = max(c[i], c[j]), len = r - l;
     int k = 31 - __builtin_clz(len);
     return min(mn[l + 1][k], mn[r - (1 << k) + 1][k]);
   }
 
 
 };
+
 
 void Accepted(){
   
