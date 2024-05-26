@@ -54,7 +54,7 @@ template < typename T = int, bool Base = 0 > struct Hash_LazySegmentTree {
     Item(pair < T, T > ans, T len) : ans(ans) , len(len) {}
   };
  
-  Hash_LazySegmentTree(const int N, const string &s) : s(s) , n(N) {
+  explicit Hash_LazySegmentTree(const int N, const string &s) : s(s) , n(N) {
     size = 1;
     while(size < n) size *= 2;
     lazy = vector < T > (2 * size, -1);
@@ -71,8 +71,7 @@ template < typename T = int, bool Base = 0 > struct Hash_LazySegmentTree {
   inline pair < T, T > lazy_process(T val, T len){
     T h1 = mul(val, (p_pow[0][len] - 1 + mod1) % mod1, mod1);
     T h2 = mul(val, (p_pow[1][len] - 1 + mod2) % mod2, mod2);
-    h1 = mul(h1, p_1inv, mod1), h2 = mul(h2, p_2inv, mod2);
-    return {h1 , h2};
+    return {mul(h1, p_1inv, mod1), mul(h2, p_2inv, mod2)};
   }  
  
   inline void propagate(int idx, int l, int r){
@@ -84,7 +83,7 @@ template < typename T = int, bool Base = 0 > struct Hash_LazySegmentTree {
   
   inline void build(int idx, int l, int r){
     if(l == r) 
-      return void(tree[idx] = {s[l - 1] - 'a' + 1, s[l - 1] - 'a' + 1});
+      return void(tree[idx] = {s[l - !Base] - 'a' + 1, s[l - !Base] - 'a' + 1});
     int m = (l + r) / 2;
     build(LEFT, l, m);
     build(RIGHT, m + 1, r);
@@ -119,6 +118,10 @@ template < typename T = int, bool Base = 0 > struct Hash_LazySegmentTree {
     update(1, 1, n, l, r, val);
   }
  
+  inline void update(int idx, T val){
+    update(idx, idx, val);
+  }
+ 
   inline pair < T, T > query(int l, int r){
     return query(1, 1, n, l, r).ans;
   }
@@ -127,7 +130,6 @@ template < typename T = int, bool Base = 0 > struct Hash_LazySegmentTree {
   #undef RIGHT
  
 };
-
 
 void Accepted(){
   
