@@ -27,11 +27,14 @@ template < typename T > struct BIT {
   vector < T > Tree;
  
   BIT(int N) : n(N), Tree(n) {}
-  
  
   void add(int x, T v) {
     while (x < n) 
       Tree[x] += v, x |= (x + 1);
+  }
+ 
+  void update(int x, T v) {
+    add(x, v - range(x, x));
   }
  
   T get(int x) {
