@@ -71,9 +71,6 @@ template < typename T = int > struct Prim {
   }
 
 };
-  
- 
-} 
 
 int main(){ 
 
