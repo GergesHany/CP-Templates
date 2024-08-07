@@ -30,12 +30,15 @@ template < typename T = int > struct segment_tree {
   vector < T > Tree;
   function < T (T, T) > F;
 
-  segment_tree(int _n, T _Default, function < T (T, T) > _F) : n(_n), Default(_Default), F(_F) {
+  segment_tree(int _n, T _Default, function < T (T, T) > _F) : n(_n), F(_F) {
+    Default = _Default;
     Tree = vector < T > (4 * n + 5, Default);
   }
 
   void update(int i, T val) {
-    for (Tree[i += n] = val; i >>= 1;) Tree[i] = F(Tree[i << 1], Tree[i << 1 | 1]);
+    for (Tree[i += n] = val; i >>= 1;) {
+      Tree[i] = F(Tree[i << 1], Tree[i << 1 | 1]);
+    }
   }
 
   T query(int l, int r) {

@@ -43,7 +43,6 @@ struct Item {
   ll val;
 
   Item(ll val = 0) : val(val) {}  
-
   Item operator = (const ll rhs) {
     val = rhs;
     return *this;
@@ -56,17 +55,14 @@ template < typename T = int , bool Base = 0 > struct Segment_Tree {
   T size; 
   Item DEFAULT;
   vector < Item > Tree; 
+  function < Item(const Item&, const Item&) > op;
   
-  Segment_Tree(T n, const vector < T >& vec, T Default = 0){
+   Segment_Tree(T n, const vector < T >& vec, T Default, function<Item(const Item&, const Item&)> f) : op(f){
     size = 1;
     DEFAULT = Item(Default);
     while(size < n) size <<= 1;
     Tree = vector < Item > (size << 1, DEFAULT);
     build(vec);
-  }
-
-  Item operation(const Item& a, const Item& b){
-    return a.val > b.val ? a : b;
   }
   
   void build(const vector < T >& vec, int idx, int L, int R){
@@ -75,7 +71,7 @@ template < typename T = int , bool Base = 0 > struct Segment_Tree {
     int mid = (R + L) / 2;
     build(vec, idx << 1 , L, mid);
     build(vec, idx << 1 | 1, mid + 1, R);
-    Tree[idx] = operation(Tree[idx << 1], Tree[idx << 1 | 1]);
+    Tree[idx] = op(Tree[idx << 1], Tree[idx << 1 | 1]);
   }
 
   void build(const vector < T >& vec){
@@ -87,7 +83,7 @@ template < typename T = int , bool Base = 0 > struct Segment_Tree {
     int mid = (R + L) / 2;
     if(index <= mid) update(index, value, idx << 1, L, mid);
     else update(index, value, idx << 1 | 1, mid + 1, R);
-    Tree[idx] = operation(Tree[idx << 1], Tree[idx << 1 | 1]);
+    Tree[idx] = op(Tree[idx << 1], Tree[idx << 1 | 1]);
   }
 
   void update(const int index, const T value){
@@ -98,35 +94,24 @@ template < typename T = int , bool Base = 0 > struct Segment_Tree {
     if(lq > R || L > rq) return DEFAULT;
     if(lq >= L && rq <= R) return Tree[idx];
     int mid = (lq + rq) / 2;
-    return operation(query(L, R, idx << 1, lq, mid), query(L, R, idx << 1 | 1, mid + 1, rq));
+    return op(query(L, R, idx << 1, lq, mid), query(L, R, idx << 1 | 1, mid + 1, rq));
   }
  
   T query(const int l, const int r){
     return query(l, r, 1, 1, size).val;
   }
 
-  friend ostream& operator << (ostream &out, const Item &item) {
-    out << item.val;
-    return out;
-  }
-
-  // Segment_Tree < data type, Base of vector > st(size of vector, vector, Default value);
+  /*    
+    function < Item(const Item&, const Item&) > f = [&](Item a, Item b) -> Item {
+      return a.val < b.val ? a : b;
+    };
+    Segment_Tree < ll, 0 > st(n, a, INF, f);
+  */
 
 };
 
-
-
 void Accepted(){
   
-  int n;
-  cin >> n;
-  vector < ll > v(n);
-  cin >> v;
-  Segment_Tree < ll > st(n, v, -INF);
-  cout << st.query(1, n) << '\n';
-  st.update(n, 0);
-  cout << st.query(1, n) << '\n';
-
 }
 
 int main()
