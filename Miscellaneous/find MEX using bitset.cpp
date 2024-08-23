@@ -48,12 +48,12 @@ public:
  
 private:
   inline void insert(const T x) {
-    if (x > N) return;
+    if (x >= N) return;
     if (++cnt[x] == 1) mex[x] = false;  
   }
   
   inline void erase(const T x) {
-    if (x > N) return;
+    if (x >= N) return;
     if (--cnt[x] == 0) mex[x] = true;  
   }
   
