@@ -22,36 +22,63 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
   for (const T &x : v) out << x << ' '; return out;
 }
 
-template < class T >  struct sparse_table{
 
+template < typename Tabletype = int, typename numsType = int > class Sparse_Table{
+ 
+private:
+  using T = Tabletype;
+ 
   int LOG;
-  vector < int > log_table;
+  Tabletype DEFAULT;
   function < T(T, T) > func;
+  vector < numsType > log_table;
   vector < vector < T > > table;
-
-  sparse_table(vector < T > &vec, function < T(T, T) > f) : func(f){
-    int n = vec.size();
-    LOG = 32 - __builtin_clz(n);
-    log_table = vector < int > (n + 1);
-    table = vector < vector < T > > (LOG + 1, vector < T > (n));
-    for(int i = 2; i <= n; i++) log_table[i] = log_table[i >> 1] + 1;
-
-    for(int i = 0; i < n; i++) table[0][i] = vec[i];
-
+ 
+  inline void Build_Table(const vector < numsType > &vec){
+   for(int i = 0; i < sz(vec); i++) table[0][i] = vec[i];
     for(int j = 1; j <= LOG; j++){
-      for(int i = 0; i + (1 << j) <= n; i++){
+      for(int i = 0; i + (1 << j) <= sz(vec); i++){
         table[j][i] = func(table[j - 1][i], table[j - 1][i + (1 << (j - 1))]);
       }
     }
   }
-
-  T query(int l, int r){
+ 
+  inline void init(const int n){
+    LOG = 32 - __builtin_clz(n);
+    log_table = vector < numsType > (n + 1);
+    for(int i = 2; i <= n; i++) log_table[i] = log_table[i >> 1] + 1;
+    table = vector < vector < T > > (LOG + 1, vector < T > (n, DEFAULT));
+  }
+ 
+  // O(1) query (not overlapping)
+  const inline T query_1(int l, int r){
     int j = log_table[r - l + 1];
     return func(table[j][l], table[j][r - (1 << j) + 1]);
   }
-
-  // sparse_table < int > st(vec, [&](int a, int b){ return min(a, b); });
-
+ 
+  // O(logn) query (overlapping)
+  const inline T query_2(int l, int r){
+    T ans = DEFAULT;
+    for(int j = LOG; j >= 0; j--){
+      if((1 << j) <= r - l + 1)
+        ans = func(ans, table[j][l]), l += 1 << j;
+    }
+    return ans;
+  }
+ 
+public:
+ 
+  const inline T query(int l, int r, bool is_overlap = false){
+    return (!is_overlap ? query_1(l, r) : query_2(l, r));
+  }
+ 
+  Sparse_Table(const vector < numsType > &vec, T def, function < T(T, T) > f) : DEFAULT(def), func(f) {
+    init(sz(vec));
+    Build_Table(vec);
+  }
+ 
+  // Sparse_Table < ll, ll > mn(a, 1e18, [&](ll a, ll b){ return min(a, b); });
+ 
 };
 
 void Accepted(){
