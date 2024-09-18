@@ -32,17 +32,17 @@ struct suffix_array {
   // c[i] is the class of the suffix starting at i
   // p[i] is the index of the ith suffix in lexiographical sorting
   // lcp[i] is the length of the "lcp" of the "i and i+1" suffix in the suffix array
-
+ 
   explicit suffix_array() = default;
-
-  explicit suffix_array(string s): s(s), n(sz(s) + 1){
-    s += "$"; // '$' less than any char of the string 
+ 
+  explicit suffix_array(string &s): s(s), n(sz(s) + 1){
+    s += " "; // ' ' less than any char of the string 
     p = c = lcp = vector < int > (n);
     build();
     build_lcp();
     build_sparse_table();
   }
-
+ 
   // count sort the suffix array
   inline void count_sort(){
     vector < int > cnt(n, 0), pos(n, 0), p_new(n);
@@ -51,7 +51,7 @@ struct suffix_array {
     for (auto x : p) p_new[pos[c[x]]++] = x; 
     p = p_new;
   }
-
+ 
   // build the suffix array
   inline void build(){
     // for k = 0
@@ -60,10 +60,10 @@ struct suffix_array {
     sort(all(a));
     for (int i = 0; i < n; i++) p[i] = a[i].second;
     c[p[0]] = 0;
-
+ 
     // assign equivalence classes to suffixes 
     for (int i = 1; i < n; i++) c[p[i]] = c[p[i - 1]] + (a[i].first != a[i - 1].first);
-
+ 
     // for k > 0
     int k = 0;
     while(((1 << k) < n) and p.back() != n - 1){
@@ -80,7 +80,7 @@ struct suffix_array {
       k++;
     }
   }   
-
+ 
   // build the lcp array
   inline void build_lcp(){
     int k = 0;
@@ -103,7 +103,7 @@ struct suffix_array {
       }
     }
   }
-
+ 
   // compare two suffixes starting at i and j with length l in the original string
   inline int compare(const int i, const int j, const int l){
     assert(0 <= i && i < n && 0 <= j && j < n);
@@ -111,12 +111,12 @@ struct suffix_array {
     pair < int, int > b = {c[j], c[(j + l - 1) % n]};
     return a == b ? 0 : a < b ? -1 : 1;
   }
-
+ 
   // compare the suffix starting at i with the pattern 
   inline int compare(const int i, const string &pattern){
     return s.compare(i, sz(pattern), pattern);
   }
-
+ 
   // check if the pattern is in the string
   inline bool find(const string &pattern){
     int l = 0, r = n - 1;
@@ -129,14 +129,14 @@ struct suffix_array {
     }
     return false;
   }
-
+ 
   // return the index of the first occurrence of the pattern in the string
   inline int lower(const string &pattern){
     int L = lower_bound(p.begin(), p.end(), pattern, [&](int i, const string &pattern){
       return s.substr(i, sz(pattern)) < pattern; }) - p.begin();
     return L;
   }
-
+ 
   // return the index of the last occurrence of the pattern in the string
   inline int upper(const string& pattern){
     int R = upper_bound(p.begin(), p.end(), pattern, [&](const string &pattern, int i){
@@ -148,7 +148,7 @@ struct suffix_array {
   inline int count(const string &pattern){
     return upper(pattern) - lower(pattern) + 1;
   }
-
+ 
   // return the number of distinct substrings in the string
   inline ll distinct_substrings(){
     ll ans = 0;
@@ -158,13 +158,20 @@ struct suffix_array {
     }
     return ans;
   }
+ 
+  // return the kth smallest substring in the string
+  inline string kth_substring(int k){
+    int i = 1;
+    while(k > lcp[i]) k -= lcp[i++]; // skip the common prefix of the suffixes
+    return s.substr(p[i], k + lcp[i]); 
+  }
   
   // return the longest repeated substring in the string
   inline string longest_repeated_substring(){
     int idx = max_element(lcp.begin(), lcp.end()) - lcp.begin();
     return s.substr(p[idx], lcp[idx]); 
   }
-
+ 
   // longest common substring of the string and the pattern
   inline string longest_common_substring(const string &s, const string &t){
     string st = s + "#" + t + "$";
@@ -177,18 +184,8 @@ struct suffix_array {
     }
     return st.substr(idx, ans);
   }
-
-  // longest common prefix of the suffices i and j in the suffix array
-  inline int longest_common_prefix(int i, int j){
-    if (i == j) return n - i - 1;
-    int l = min(c[i], c[j]), r = max(c[i], c[j]), len = r - l;
-    int k = 31 - __builtin_clz(len);
-    return min(mn[l + 1][k], mn[r - (1 << k) + 1][k]);
-  }
-
-
+ 
 };
-
 
 void Accepted(){
   
