@@ -158,13 +158,6 @@ struct suffix_array {
     }
     return ans;
   }
- 
-  // return the kth smallest substring in the string
-  inline string kth_substring(int k){
-    int i = 1;
-    while(k > lcp[i]) k -= lcp[i++]; // skip the common prefix of the suffixes
-    return s.substr(p[i], k + lcp[i]); 
-  }
   
   // return the longest repeated substring in the string
   inline string longest_repeated_substring(){
