@@ -60,6 +60,7 @@ public:
     return cnt - count_less_equal(x, k);
   }
  
+  #ifdef LOCAL
   ~Binary_Trie(){
     function < void(Node*) > dfs = [&](Node* cur){
       if (!cur) return;
@@ -68,6 +69,7 @@ public:
     };
     dfs(root);
   }
+  #endif
  
 private:
   
