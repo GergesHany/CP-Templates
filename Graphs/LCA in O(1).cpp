@@ -71,35 +71,58 @@ public:
  
 };
 
+
 struct LCA {
   
-  int N;
+  int N, LOG;
   Sparse_Table st;
+  vector < vector < int > > adj, anc;
   vector < int > depth, euler, first;
-  const vector < vector < int > > adj;
-
+   
   void dfs(int u, int p, int d){
     depth[u] = d;
     euler.push_back(u);
     first[u] = sz(euler) - 1;
+
+    anc[u][0] = p; 
     for(auto v : adj[u]) if (v != p) {
+      anc[v][0] = u;
+      for(int i = 1; i < LOG; i++) anc[v][i] = anc[anc[v][i - 1]][i - 1];
+
       dfs(v, u, d + 1);
       euler.push_back(u);
     }
   }
   
   LCA(const vector < vector < int > > &adj, int root = 1) : adj(adj), N(sz(adj) + 1){
+    LOG = 1;
+    while((1 << LOG) <= N) LOG++;
     depth = first = vector < int > (N);
-    dfs(root, -1, 0);
+    anc = vector < vector < int > > (N, vector < int > (LOG + 1));
+    
+    dfs(root, root, 0);
     st = Sparse_Table(euler, [&](int a, int b){ return depth[a] < depth[b] ? a : b; });
   }
 
-  int query(int u, int v){
+  int lca(int u, int v){
     if(first[u] > first[v]) swap(u, v);
     return st.query(first[u], first[v]);
   }
+
+  int distance(int u, int v){
+    return depth[u] + depth[v] - 2 * depth[lca(u, v)];
+  }
+
+  bool is_ancestor(int u, int v){ return lca(u, v) == u; }
+
+  int kth_ancestor(int u, ll k){
+    if (depth[u] < k) return -1;
+    for(int i = 0; i < LOG; i++) if((k >> i) & 1) u = anc[u][i];
+    return u;
+  }  
   
 };
+
 
 void Accepted(){
   
