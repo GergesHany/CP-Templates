@@ -1,5 +1,5 @@
+#include <algorithm>
 #include <bits/stdc++.h>
-#include <cassert>
  
 using namespace std; 
 #define PI acos(-1)
@@ -145,7 +145,7 @@ public:
   inline ll count(const string &s){
     ll ans = 0;
     for (int i = 0; i < LOG; i++) 
-      ans += aho[i].count_occurrences(s);
+      if (!list[i].empty()) ans += aho[i].count_occurrences(s);
     return ans;
   }
 
@@ -157,13 +157,40 @@ public:
     return ans;
   }
 
+  inline void delete_word(const string& s) {
+    for (int l = 0; l < LOG; l++) {
+      auto it = find_if(all(list[l]), [&](const pair<string, int>& p) { return p.first == s; });
+      if (it != list[l].end()) {
+        list[l].erase(it);
+        aho[l] = aho_corasick_node(list[l]);
+        break;
+      }
+    }
+  }
+
 
 };
 
 void Accepted(){
-  
-    
 
+  int q;
+  cin >> q;
+
+  aho_corasick ac;
+
+  while (q--) {
+    int t;
+    string s;
+    cin >> t >> s;
+    if (t == 1) {
+      ac.insert(s);
+    } else if (t == 2) {
+      ac.delete_word(s);
+    } else {
+      cout << ac.count(s) << '\n';
+    }
+  }  
+ 
 } 
 
 signed main(){ 
